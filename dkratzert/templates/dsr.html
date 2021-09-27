@@ -3,13 +3,15 @@
 {% block content %}
 
     <h1>Disordered Structure Refinement (DSR)</h1>
-    <p>The refinement of highly disordered solvents and moieties with <a href="http://shelx.uni-ac.gwdg.de/SHELX/index.php" target="_blank">SHELXL</a> is an often slow or
-        even difficult task. Therefore these voids frequently are "squeezed out" of the X-ray data. This practice is often not necessary.
+    <p>The refinement of highly disordered solvents and moieties with
+        <a href="http://shelx.uni-ac.gwdg.de/SHELX/index.php" target="_blank">SHELXL</a>
+        is an often slow or even difficult task.
+        Therefore these voids frequently are "squeezed out" of the X-ray data. This practice is often not necessary.
         To help with the routine work of refining disordered solvents the program DSR was developed in Python.
     </p>
 
     <p style="text-align: center">
-        <img alt="" src="pictures/dsr/dsr_1.png" width="60%"/>
+        <img alt="" src="{{ 'pictures/dsr/dsr_1.png' }}" width="60%"/>
     </p>
 
     <p>The program-package consists of a simple text-database with fragments of molecules and the DSR program itself.
@@ -34,9 +36,11 @@
 
     <h3>DSR GUI</h3>
     <p>You find a graphical user interface for DSR in <a href="https://www.shelxle.org/shelx/" target="_self" title="">ShelXle</a>. Just select three source
-        and three target atoms each and you can transfer the desired fragment into your structure. The edit window makes it easy to modify/create fragments.
-        <a href="https://www.youtube.com/watch?v=hKl6Sms_4tE" target="_blank" title="">See a Youtube video how it works</a>. You can of course always also
-        use DSR on the command line.
+        and three target atoms each and you can transfer the desired fragment from DSR into your structure in <a href="https://www.shelxle.org/shelx/" target="_self"
+                                                                                                                 title="">ShelXle</a>.
+        The edit window makes it easy to modify/create fragments.
+        <a href="https://www.youtube.com/watch?v=hKl6Sms_4tE" target="_blank" title="">See a Youtube video how it works</a>.
+        You also use DSR on the command line.
     </p>
 
     <h3>Known bugs</h3>
@@ -44,7 +48,7 @@
         Please update ShelXle in order to resolve the problem.</p>
 
     <h3>User Manual</h3>
-        <a href="https://github.com/dkratzert/DSR/raw/master/manuals/DSR-manual.pdf" target="_self" title="">DSR-manual.pdf</a>
+    <a href="https://github.com/dkratzert/DSR/raw/master/manuals/DSR-manual.pdf" target="_self" title="">DSR-manual.pdf</a>
     <br>
     <br>
     <h3>

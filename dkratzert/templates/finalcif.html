@@ -11,21 +11,27 @@
     <p></p>
     <p>The button "save cif file" saves the current file under '<strong>name'-finalcif.cif.</strong> FinalCif will never make Changes to the original CIF file.</p>
     <p></p>
-    <p><img src="pictures/finalcif_main.png"/></p>
-
-    <h3>
-        <a href="https://xs3-data.uni-freiburg.de/finalcif/help/" target="_blank" title="">Documentation</a></h3>
-
+    <p>
+        <a href="{{ 'pictures/finalcif/finalcif_main.png' }}" target="_blank">
+            <img src="{{ 'pictures/finalcif/finalcif_main.png' }}" alt="" width="90%"/>
+        </a>
+    </p>
+    <br>
     <h3>Downloads</h3>
 
     {% include 'partials/files_table.html' %}
 
+    <h3>
+        <a href="{{ 'files/finalcif/docs' }}" target="_blank" title="">Documentation</a>
+    </h3>
+    <br>
+
     <p> Software developers can find the source <a href="https://github.com/dkratzert/FinalCif"
                                                    target="_self" title="">code on Github</a>.</p>
-    <p><strong> </strong></p>
+    <p></p>
     <p>
         <a href="https://raw.githubusercontent.com/dkratzert/FinalCif/master/docs/changelog.txt"
-           target="_self" title="">Changelog.txt </a>
+           target="_blank" title="">Changelog.txt </a>
     </p>
     <p></p>
     <p>As always, please report bugs! <a class="email-link" href="mailto:daniel.kratzert@ac.uni-freiburg.de"

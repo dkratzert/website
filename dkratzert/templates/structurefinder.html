@@ -3,9 +3,173 @@
 {% block content %}
 
     <h1>StructureFinder</h1>
-    <p>This is structureFinder</p>
-    <p>You find all structures with it</p>
+
+    <p>StructureFinder indexes all .cif and/or .res files below a certain directory(s) and makes them searchable.
+        Additionally, it is able to search for unit cells in the Bruker
+        APEX2/3 software database.
+    </p>
+    <p>You may cite StructureFinder as </p>
+    <p><a class="external-link" href="https://doi.org/10.1107/S1600576719001638" target="_blank" title="">
+        D. Kratzert, I. Krossing,<em> J. Appl. Cryst.</em> <strong>2019</strong>,
+        <em>52</em>, 468-471. https://doi.org/10.1107/S1600576719001638.</a>
+        <a class="external-link" href="https://www.xs3-data.uni-freiburg.de/structurefinder/structurefinder_reprint.pdf"
+           target="_blank" title="">(local copy)</a></p>
+    <p></p>
+    <h4>Downloads</h4>
 
     {% include 'partials/files_table.html' %}
+
+    <p></p>
+    <h4>Screenshots</h4>
+    <p>In the main tab, you can import cif files to a database, you can save this database, you can open an existing database or open the APEX2/3 database on your computer. To
+        search the APEX database, just click on the 'Open APEX Database' button. The program will try to connect the database on the local computer with the default username and
+        password. If that fails, it will ask for a different.</p>
+    <p>Selecting a certain entry of the database shows the unit cell, the residuals and the asymmetric unit.</p>
+    <p>Basic search options for unit cells and text is also available. The cell search takes six parameters <em>a</em>, <em>b</em>, <em>c</em>, <em>α</em>, <em>β,</em> <em>γ</em>.
+        The search is unsharp so 10 10 10 90 90 90 would find the same cell as 10.00 10.00 10.00 90.00 90.00 90.00.</p>
+    <div>The algorithm is a combination of a cell comparison by volume first (for speed) and subsequent matching using the Lenstra-Lenstra-Lovasz lattice basis reduction for cell
+        reduction with a sphere search taking periodic boundary conditions into account. The lattice matching implementation was made by the http://pymatgen.org/ project.
+    </div>
+    <div></div>
+    <div>
+        <p><span>The tolerances for the cell search are:</span></p>
+        <p><strong>regular</strong><br/>volume: ±3 %, length: 0.06 Å, angle: 1.0°</p>
+        <p><strong>more results option</strong><br/>volume: ±9 %, length: 0.2 Å, angle: 2.0°</p>
+    </div>
+    <div>The text search field searches in the directory, name and .res file text data. You can concatenate words with ? and *. For example foo*bar means 'foo[any text]bar'.</div>
+    <div></div>
+
+    <p>
+        <a href="resolveuid/a8389d5a685943fc90df413bd05d1c7c" target="_self" title="">
+            <img src="resolveuid/a8389d5a685943fc90df413bd05d1c7c"/>
+        </a></p>
+    <p><span>Pro tip: Double click on the unit cell to copy the cell to the clip board.</span></p>
+    <p></p>
+    <p></p>
+    <p>The 'all cif values' tab shows all cif values available in the database. These are not necessarily all but most values from the cif file.</p>
+    <p>
+        <a href="resolveuid/db7cb6fc4d7b48d0bd92b475bc4aa0db" target="_self" title="">
+            <img src="resolveuid/db7cb6fc4d7b48d0bd92b475bc4aa0db"/>
+        </a></p>
+    <p></p>
+    <p>The 'Advanced Search' tab allows you to search for several options at a time and also allows to exclude parameters. I will add more options in the future. I would be happy
+        if you suggest more search options if you need more.</p>
+    <p>
+        <a href="resolveuid/8d5a6b5b62084bd2a71b1c0034378493" target="_self" title="">
+            <img src="resolveuid/8d5a6b5b62084bd2a71b1c0034378493"/></a></p>
+    <p></p>
+    <h4><br class="Apple-interchange-newline"/>Indexing cif and/or res files</h4>
+    <p>The 'Import Directory' button starts indexing of cif or res files below the selected directory recoursively, deopending which file ending is enabled. It will scan
+        all subdirectories for cif/res files as well as zip files containing cif files. The time for indexing mostly depends on the speed of your hard drive. Scanning a complete
+        256 GB SSD takes about 50s. An eight years old complete file server with over 100 user directories and 10.000 crystal structures can take an hour.</p>
+    <p>You should not run the import over a network connection. It will take ages!</p>
+    <p></p>
+    <h4>Command Line file Indexer</h4>
+    <p>With the <em>strf_cmd.py</em> script, you can index directories without a graphical user interface.</p>
+    <p>The options -d and -e can be given multiple times like -d /foo -d /bar.</p>
+    <p><em>The command line indexer only needs Python &gt;= 3.4.</em></p>
+    <p></p>
+    <pre>$ python3.6 strf_cmd.py
+    <br>usage: strf_cmd.py [-h] [-d "directory"] [-e "directory"] [-o "file name"]<br>
+Command line version of StructureFinder to collect cif files to a database.
+StructureFinder will search for cif/res files in the given directory(s)
+recursively. (Either -c, -r or both options must be active!)
+optional arguments:
+-h, --help      show this help message and exit
+-d "directory"  Directory(s) where cif files are located.
+-e "directory"  Directory names to be excluded from the file search.
+                Default is: "ROOT", ".OLEX", "TMP", "TEMP", "Papierkorb",
+                    "Recycle.Bin" Modifying -e option discards the default.
+-o "file name"  Name of the output database file.
+                Default: "structuredb.sqlite"
+-c              Add .cif files (crystallographic information file) to the database.
+-r              Add SHELX .res files to the database.
+--delete        Delete and do not append to previous database.
+    </pre>
+    <p></p>
+    <p></p>
+
+    <h4>Indexing Example</h4>
+    <p>Creates the file structuredb.sqlite in the current directory:</p>
+    <pre>python3.6.exe ./strf_cmd.py -d D:\Github\StructureFinder -o test.sqlite -c -r --delete<br/>collecting files below D:\Github\StructureFinder<br/>74 files considered.<br/>Added 262 files (258 cif, 4 res) files (212 in compressed files) to database in: <br/>  0 h, 0 m, 2.05 s<br/>---------------------<br/>Total 262 cif/res files in 'test.sqlite'. Duration: 0 h, 0 m, 2.81 s</pre>
+    <p></p>
+    <p>The command line version always appends all data to an already existing database in the current working directory.</p>
+    <p>Should I add support for pdb files? Please send me an email if you think I should.</p>
+    <p></p>
+
+    <h4>Database Format</h4>
+    <p>The database format is just plain sqlite (<a class="external-link" href="http://www.sqlite.org/" target="_self" title="">http://www.sqlite.org/</a>). You can view the
+        database structure with the fantastic sqlitebrowser (<a class="external-link" href="http://sqlitebrowser.org/" target="_self" title="">http://sqlitebrowser.org/</a>).</p>
+    <p>The database structure is not supposed to change, but I might add compression to the file format in the future. </p>
+
+    <h4>CSD search</h4>
+    <p>StructureFinder is able to search for unit cells in the CSD with the <a class="external-link"
+                                                                               href="http://www.ccdc.cam.ac.uk/Community/csd-community/cellcheckcsd/" target="_blank"
+                                                                               title="">CellCheckCSD </a>program. As soon as <a class="external-link"
+                                                                                                                                href="http://www.ccdc.cam.ac.uk/Community/csd-community/cellcheckcsd/"
+                                                                                                                                target="_blank" title="">CellCheckCSD </a>is
+        installed, you can search the CSD. Double-Click on a result row to get the detailed structure page.</p>
+    <p></p>
+    <h4>Web interface</h4>
+    <p>Instead of the regular user interface, you can run StructureFinder as web service. First, create a database with <em>strf_cmd.py.</em> This can be automated
+        with a <a class="external-link" href="https://en.wikipedia.org/wiki/Cron" target="_blank" title="">cron job</a> to do it regularly. The zip file strf_cmd_version.zip above
+        contains all you need to start the web service or use the Git repository. The web interface needs the Gunicorn WSGI HTTP Server to be installed (via "pip install
+        gunicorn").<em></em></p>
+    <p><span></span>Change the variables</p>
+    <pre>host = "127.0.0.1"<br/>port = "80"<br/>dbfilename = "/path/to/database.sqlite"</pre>
+    <p>in cgi_ui/cgi-bin/strf_web.py to your desired webserver adress and database path. Some operating systems do not allow users to run services at port 80. You might
+        use port 8080 instead.</p>
+    <p>Go into the Structurefinder main directory and run</p>
+    <pre>python3 cgi_ui/cgi-bin/strf_web.py</pre>
+    <p></p>
+    <p><strong>Be aware that running a web server has security implications.</strong> Do not expose this server to the internet unless you know what you are doing!</p>
+    <p>The web site should look like this after clicking on a table row:</p>
+    <p>
+        <a href="resolveuid/ef03b7fe137e4e46ae0dc1d763670270" target="_self" title="">
+            <img src="resolveuid/ef03b7fe137e4e46ae0dc1d763670270"/>
+        </a>
+    </p>
+    <p></p>
+    <h4>Open Database Automatically</h4>
+    <p>If you want to open the same database file with the Windows version, you can add the database file as command line parameter in the start menu shortcut:</p>
+    <p><img src="resolveuid/1b9418694353486db6fc1c22a3ca951f"/></p>
+    <h4></h4>
+    <h4>Changelog<br/><br/></h4>
+    <p>-v55 <span>Display database file name below main table</span>.</p>
+    <p>-v54 Small correction.</p>
+    <p>-v53 Fixed crash when database location changes.</p>
+    <p>-v52 Unit cell is visible again.</p>
+    <p>-v51 Fixed crash on CIF files with values like 1.234().</p>
+    <p>-v50 Fixed major bug that made advanced search useless.</p>
+    <p>-v49 Added possibility to search for CCDC numbers. Small other improvements.</p>
+    <p>-v48 Saves last dir to settings. Added append button to append new directories.</p>
+    <p>-v47 Fixed bug with non-centrosymmetric shelx files. More compatible win32 version.</p>
+    <p>-v46 Fixed bug in cif parser that prevented reading of atoms from files written by Crystals</p>
+    <p>-v45 Fixed installation problems on some systems.</p>
+    <p>-v44 Small improvements in the cif file parser.</p>
+    <p>-v43 Added search option for <em>R</em><sub>1</sub> in advanced search. </p>
+    <p>-v42 Fixed some more minor search bugs.</p>
+    <p>-v41 Fixed completely wrong result for "more results" option. Added distinction between unit cells <br/> from APEX and unit cells from
+        files for optimal search thresholds. Made search behavior more intuitive.</p>
+    <p>-v40 Improved program startup.</p>
+    <p>-v39 Fixed bug that could stall the application while loading QWebEngineView.</p>
+    <p>-v38 _data name was shown incorrectly.</p>
+    <p>-v37 Fixed some minor search issues. </p>
+    <p>-v36 Fixed .res file data appearing in compressed cif entries. Fixed certain search condition.</p>
+    <p>-v35 Improved .cif file parser</p>
+    <p>-v34 Web interface improvements.</p>
+    <p>-v33 Added search option to search for structures with only certain elements included.</p>
+    <p>-v32 Improved element search. Is is faster and more precise. (<span class="visualHighlight">You need to rebuild your database!</span>)</p>
+    <p>-v31 Fixed two bugs that caused StructureFinder to crash during cell search.</p>
+    <p>-v30 Added search in <a class="external-link" href="https://www.ccdc.cam.ac.uk/Community/csd-community/cellcheckcsd/" target="_blank" title="">CellCeckCSD</a> database. You
+        need to install CellChekCSD in order to search CSD data.</p>
+    <p>-v29 Fixed missing shelxfile directory in 32bit installer.</p>
+    <p>-v28 Faster structure display. Some bugs fixed.</p>
+    <p>-v27 Suport "grow structure" for web and qt interface. </p>
+    <p></p>
+    <p>License</p>
+    <p>StructureFinder is free software and licensed under the <a class="external-link" href="https://en.wikipedia.org/wiki/Beerware" target="_self" title="">beerware
+        license</a>.</p>
+
 
 {% endblock %}
