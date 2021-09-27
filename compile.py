@@ -24,66 +24,84 @@ def _get_modified_date(os_path: Path) -> str:
 
 
 def _get_executable(base_path: Path, pattern: str) -> Path:
-    return list(base_path.glob(pattern))[0]
+    paths = list(base_path.glob(pattern))
+    return paths[0] if paths else Path()
+
+
+def _is_there(file):
+    return file.is_file() and file.exists()
+
+
+def _get_version_number(base_path):
+    version_txt = _get_executable(base_path, 'version.txt')
+    if version_txt.exists() and version_txt.is_file():
+        return version_txt.read_text()
+    else:
+        return '0'
 
 
 def dsr(template):
+    context = {}
     base_path = Path('./files/dsr')
-    windows = _get_executable(base_path, 'dsr-setup*.exe')
+    windows = _get_executable(base_path, 'DSR-setup*.exe')
     ubuntu = _get_executable(base_path, 'dsr*.deb')
-    suse = _get_executable(base_path, 'dsr*.rpm')
+    suse = _get_executable(base_path, 'DSR*.rpm')
     mac = _get_executable(base_path, 'DSR*.dmg')
-    version = _get_executable(base_path, 'version.txt').read_text()
-    return {
-        'windows_name': windows,
-        'windows_date': _get_modified_date(windows),
-        'ubuntu_name' : ubuntu,
-        'ubuntu_date' : _get_modified_date(ubuntu),
-        'suse_name'   : suse,
-        'suse_date'   : _get_modified_date(suse),
-        'mac_name'    : mac,
-        'mac_date'    : _get_modified_date(mac),
-        'version': version
-    }
+    files = _get_files_context(mac, suse, ubuntu, windows)
+    context.update(
+        {'version'  : _get_version_number(base_path),
+         'link_base': base_path,
+         'files'    : files
+         }
+    )
+    return context
 
 
 def structurefinder(template):
-    base_path = Path('./files/structurefinder')
-    windows = _get_executable(base_path, 'StructureFinder*.exe')
+    context = {}
+    base_path = Path('./files/structurefinder/')
+    windows = _get_executable(base_path, 'StructureFinder-*.exe')
     ubuntu = _get_executable(base_path, 'StructureFinder*_ubuntu')
     suse = _get_executable(base_path, 'StructureFinder*_opensuse')
-    version = _get_executable(base_path, 'version.txt').read_text()
-    return {
-        'windows_name': windows,
-        'windows_date': _get_modified_date(windows),
-        'ubuntu_name' : ubuntu,
-        'ubuntu_date' : _get_modified_date(ubuntu),
-        'suse_name'   : suse,
-        'suse_date'   : _get_modified_date(suse),
-        # 'mac_name'    : 'StructureFinder-setup-x64-v55.exe',
-        # 'mac_date'    : '2021-05-04',,
-        'version': version
-    }
+    mac = _get_executable(base_path, 'StructureFinder*macos.app.zip')
+    # print(base_path, windows, '###')
+    files = _get_files_context(mac, suse, ubuntu, windows)
+    context.update(
+        {'version'  : _get_version_number(base_path),
+         'link_base': base_path,
+         'files'    : files
+         })
+    return context
 
 
 def finalcif(template):
+    context = {}
     base_path = Path('./files/finalcif')
     windows = _get_executable(base_path, 'FinalCif-setup-x64*.exe')
     ubuntu = _get_executable(base_path, 'FinalCif*ubuntu')
     suse = _get_executable(base_path, 'FinalCif*opensuse')
     mac = _get_executable(base_path, 'Finalcif*macos.app.zip')
-    version = _get_executable(base_path, 'version.txt').read_text()
-    return {
-        'windows_name': windows,
-        'windows_date': _get_modified_date(windows),
-        'ubuntu_name' : ubuntu,
-        'ubuntu_date' : _get_modified_date(ubuntu),
-        'suse_name'   : suse,
-        'suse_date'   : _get_modified_date(suse),
-        'mac_name'    : mac,
-        'mac_date'    : _get_modified_date(mac),
-        'version'     : version
-    }
+    files = _get_files_context(mac, suse, ubuntu, windows)
+    context.update(
+        {'version'  : _get_version_number(base_path),
+         'link_base': base_path,
+         'files'    : files
+         }
+    )
+    return context
+
+
+def _get_files_context(mac=Path(), suse=Path(), ubuntu=Path(), windows=Path()):
+    files = []
+    if _is_there(windows):
+        files.append((windows.name, _get_modified_date(windows)))
+    if _is_there(ubuntu):
+        files.append((ubuntu.name, _get_modified_date(ubuntu)))
+    if _is_there(suse):
+        files.append((suse.name, _get_modified_date(suse)))
+    if _is_there(mac):
+        files.append((mac.name, _get_modified_date(mac)))
+    return files
 
 
 if __name__ == "__main__":
@@ -96,11 +114,11 @@ if __name__ == "__main__":
                                     ('dsr.html', dsr),
                                     ('finalcif.html', finalcif),
                                     ],
-                          # mergecontexts=True,
+                          mergecontexts=True,
                           )
     print(Path('.').resolve())
-    shutil.copytree(Path('../pictures'), Path(outpath).joinpath('pictures'), dirs_exist_ok=True)
-    shutil.copytree(Path('../files'), Path(outpath).joinpath('files'), dirs_exist_ok=True)
+    shutil.copytree(Path('./pictures'), Path(outpath).joinpath('pictures'), dirs_exist_ok=True)
+    shutil.copytree(Path('./files'), Path(outpath).joinpath('files'), dirs_exist_ok=True)
 
     # enable automatic reloading
     site.render(use_reloader=True)

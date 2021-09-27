@@ -3,6 +3,34 @@
 {% block content %}
 
     <h1>FinalCif</h1>
-    <p>This is FinalCif. Huray</p>
+    <p></p>
+    <p>Finalcif is mainly intended for Bruker users, but works for other CIF files too. It collects all the information from a work folder needed in order to finalize a CIF file
+        for publication. In ideal cases, it takes one click to have a publication-ready file. <strong>But check the file thoroughly</strong> afterwards, no software is perfect!</p>
+    <p>Essentially, you must have the corresponding CIF file for FinalCif in its original 'work' folder, which contains all other files such as SAINT list files, SADABS list file,
+        SHELX list files, etc. that led to this cif file.</p>
+    <p></p>
+    <p>The button "save cif file" saves the current file under '<strong>name'-finalcif.cif.</strong> FinalCif will never make Changes to the original CIF file.</p>
+    <p></p>
+    <p><img src="pictures/finalcif_main.png"/></p>
+
+    <h3>
+        <a href="https://xs3-data.uni-freiburg.de/finalcif/help/" target="_blank" title="">Documentation</a></h3>
+
+    <h3>Downloads</h3>
+
+    {% include 'partials/files_table.html' %}
+
+    <p> Software developers can find the source <a href="https://github.com/dkratzert/FinalCif"
+                                                   target="_self" title="">code on Github</a>.</p>
+    <p><strong> </strong></p>
+    <p>
+        <a href="https://raw.githubusercontent.com/dkratzert/FinalCif/master/docs/changelog.txt"
+           target="_self" title="">Changelog.txt </a>
+    </p>
+    <p></p>
+    <p>As always, please report bugs! <a class="email-link" href="mailto:daniel.kratzert@ac.uni-freiburg.de"
+                                         target="_self"
+                                         title="">dkratzert@gmx.de</a></p>
+
 
 {% endblock %}

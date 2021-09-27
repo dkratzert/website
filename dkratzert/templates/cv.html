@@ -2,36 +2,13 @@
 
 {% block content %}
 
-    <h1>DSR</h1>
-    <p>This is DSR page</p>
-    <p>Disorder all!</p>
+    <h1>About me</h1>
+    <p>This is a page</p>
 
-    <table class="table table-md">
-        <thead>
-        <tr>
-            <th colspan="2">Current release</th>
-        </tr>
-        </thead>
+    <ul>
+        <li>Foo</li>
+        <li>Bar</li>
+        <li>Baz</li>
 
-        <tbody>
-        <tr>
-            <td>
-                <a href="{{ strf_windows_link }}">{{ strf_windows_name }}</a>
-            </td>
-            <td>
-                {{ strf_windows_date }}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a href="{{ strf_ubuntu_link }}">{{ strf_ubuntu_name }}</a>
-            </td>
-            <td>
-                {{ strf_ubuntu_date }}
-            </td>
-        </tr>
-        </tbody>
-
-    </table>
-
+    </ul>
 {% endblock %}

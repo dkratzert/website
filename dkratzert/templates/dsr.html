@@ -2,40 +2,7 @@
 
 {% block content %}
 
-    <h1>DSR</h1>
-    <p>This is DSR page</p>
-    <p>Disorder all!</p>
-
-    <table class="table table-md">
-        <thead>
-        <tr>
-            <th colspan="2">Current release</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr>
-            <td>
-                <a href="{{ strf_windows_link }}">{{ strf_windows_name }}</a>
-            </td>
-            <td>
-                {{ strf_windows_date }}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a href="{{ strf_ubuntu_link }}">{{ strf_ubuntu_name }}</a>
-            </td>
-            <td>
-                {{ strf_ubuntu_date }}
-            </td>
-        </tr>
-        </tbody>
-
-    </table>
-
-
-    <h3><strong>Disordered Structure Refinement (DSR)</strong></h3>
+    <h1>Disordered Structure Refinement (DSR)</h1>
     <p>The refinement of highly disordered solvents and moieties with <a href="http://shelx.uni-ac.gwdg.de/SHELX/index.php" target="_blank">SHELXL</a> is an often slow or
         even difficult task. Therefore these voids frequently are "squeezed out" of the X-ray data. This practice is often not necessary.
         To help with the routine work of refining disordered solvents the program DSR was developed in Python.
@@ -56,56 +23,55 @@
         I can only fix bugs that are known to me. Also wishes for new fragments or program features are very welcome!</p>
     <p>You may cite DSR (or FragmentDB) as</p>
     <p><a href="http://journals.iucr.org/j/issues/2018/03/00/to5174/to5174.pdf" target="_blank" title="">D. Kratzert, I. Krossing, J. Appl.
-        Cryst. <strong>2018</strong>, <em>51</em>, 928-934. doi: 10.1107/S1600576718004508</a> (<a class="external-link"
-                                                                                                   href="https://www.xs3-data.uni-freiburg.de/data/dsr_2_reprint.pdf"
-                                                                                                   target="_blank" title="">direct download</a>)</p>
+        Cryst. <strong>2018</strong>, <em>51</em>, 928-934. doi: 10.1107/S1600576718004508</a> (<a
+            href="https://www.xs3-data.uni-freiburg.de/data/dsr_2_reprint.pdf"
+            target="_blank" title="">direct download</a>)</p>
     <p>
         <a href="http://scripts.iucr.org/cgi-bin/paper?S1600576715005580" target="_blank" title="">D. Kratzert, J.J. Holstein, I. Krossing, J.
             Appl. Cryst. <strong>2015</strong>, <em>48</em>, 933-938. doi:10.1107/S1600576715005580</a>
         (<a href="https://www.xs3-data.uni-freiburg.de/data/dsr_1.pdf" target="_blank" title="">download</a>)
     </p>
 
-    <h4>DSR GUI</h4>
+    <h3>DSR GUI</h3>
     <p>You find a graphical user interface for DSR in <a href="https://www.shelxle.org/shelx/" target="_self" title="">ShelXle</a>. Just select three source
         and three target atoms each and you can transfer the desired fragment into your structure. The edit window makes it easy to modify/create fragments.
         <a href="https://www.youtube.com/watch?v=hKl6Sms_4tE" target="_blank" title="">See a Youtube video how it works</a>. You can of course always also
         use DSR on the command line.
     </p>
 
-    <h4>Known bugs</h4>
+    <h3>Known bugs</h3>
     <p>In ShelXle, you might encounter the appearance of black or colored boxes instead of atom labels. This bug is fixed in the newest version of ShelXle.
         Please update ShelXle in order to resolve the problem.</p>
 
-    <h4><strong>User Manual:
-        <a class="external-link" href="https://github.com/dkratzert/DSR/raw/master/manuals/DSR-manual.pdf" target="_self" title="">
-            DSR-manual.pdf</a></strong>
-    </h4>
-    <p>Version 221 does not use SHELXL for the fragment fit anymore. <strong>You may need to reinstall DSR instead of the automatic update to get it working again.</strong>
-        (otherwise you might get a warning about a missing numpy package).
-    </p>
-    <p><strong>stable version:</strong></p>
-    <p></p>
+    <h3>User Manual</h3>
+        <a href="https://github.com/dkratzert/DSR/raw/master/manuals/DSR-manual.pdf" target="_self" title="">DSR-manual.pdf</a>
+    <br>
+    <br>
     <h3>
-        <strong>Download: <a href="https://www.xs3-data.uni-freiburg.de/data/" target="_self" title="">DSR</a></strong>
-        <a href="https://www.xs3-data.uni-freiburg.de/data/" target="_self"> for <strong>Windows, MacOS X and Linux</strong></a></h3>
+        <strong>Downloads</strong>
+    </h3>
 
-    <div>
-        <h4><strong>Recent Changes:</strong></h4>
-        <h4><strong><a class="external-link" href="https://github.com/dkratzert/DSR/blob/master/setup/Output/changelog.txt" target="_blank" title="">changelog.txt</a></strong></h4>
-    </div>
+    {% include 'partials/files_table.html' %}
 
+    <br>
+    <h3>Recent Changes:</h3>
+
+    <a href="https://github.com/dkratzert/DSR/blob/master/setup/Output/changelog.txt" target="_blank" title="">changelog.txt</a>
+    <br>
+    <br>
+    <h4>Virus Scanners</h4>
+    <p>Some antivirus scanners don't seem to like DSR. If you have problems installing DSR, please let me know. Most antivirus vendors allow the
+        correction of false-positive virus detections.</p>
+
+    <h4>Miscelanious</h4>
     <ul>
         <li>You prefer Olex2? Then you might want to use the <a class="internal-link" href="fragmentdb.html" target="_self" title="">FragmentDB</a>
             plugin. It is a port of DSR to Olex2.
         </li>
-        <li>You just need a parser for SHELX files? Then you might be interested in my <a class="external-link" href="https://github.com/dkratzert/ShelXFile" target="_self"
-                                                                                          title="">ShelXFile</a> project.
+        <li>You just need a parser for SHELX files? Then you might be interested in my
+            <a href="https://github.com/dkratzert/ShelXFile" target="_self" title="">ShelXFile</a> project.
         </li>
     </ul>
-
-    <h4>Virus Scanners</h4>
-    <p>Some antivirus scanners don't seem to like DSR. If you have problems installing DSR, please let me know. Most antivirus vendors allow the
-        correction of false-positive virus detections.</p>
 
     <p>Some molecular fragments are taken from the "<a href="http://xray.chem.wisc.edu/Projects/IdealizedMolecularGeometry.html">Idealized Molecular Geometry
         Library</a>" of Ilia A. Guzei <br/>(I. A. Guzei, <em>J. Appl. Cryst.</em> <strong>2014</strong>, 47, 806-809).</p>
@@ -116,7 +82,7 @@
         networks </em>(version 1.8.1) 2013, <a href="http://networkx.github.io/">http://networkx.github.io/</a>.
     </p>
     <h4>License</h4>
-    <p>DSR is free software and licensed under the <a class="external-link" href="https://en.wikipedia.org/wiki/Beerware" target="_self" title="">beerware license</a>.</p>
+    <p>DSR is free software and licensed under the <a href="https://en.wikipedia.org/wiki/Beerware" target="_self" title="">beerware license</a>.</p>
 
 
 

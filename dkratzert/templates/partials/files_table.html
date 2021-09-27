@@ -1,0 +1,25 @@
+{# The table for downloadable files #}
+
+<table class="table table-md">
+    <thead>
+    <tr>
+        <th colspan="2">Current release</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    {% for file, date in files %}
+        <tr>
+            <td>
+                <a href="{{ link_base }}/{{ file }}">{{ file }}</a>
+            </td>
+            <td>
+                {{ date }}
+            </td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+
+</table>
