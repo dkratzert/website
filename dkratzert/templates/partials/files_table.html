@@ -3,19 +3,22 @@
 <table class="table table-md">
     <thead>
     <tr>
-        <th colspan="2">Current release</th>
+        <th colspan="3">Current release</th>
     </tr>
     </thead>
 
     <tbody>
 
-    {% for file, date in files %}
+    {% for file in files %}
         <tr>
             <td>
-                <a href="{{ link_base }}/{{ file }}">{{ file }}</a>
+                <a href="{{ link_base }}/{{ file.name }}">{{ file.name }}</a>
             </td>
             <td>
-                {{ date }}
+                {{ file.date }}
+            </td>
+            <td>
+                {{ file.system }}
             </td>
         </tr>
     {% endfor %}

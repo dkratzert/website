@@ -1,5 +1,6 @@
 import os
 import shutil
+from collections import namedtuple
 from datetime import datetime
 from pathlib import Path
 
@@ -93,14 +94,15 @@ def finalcif(template):
 
 def _get_files_context(mac=Path(), suse=Path(), ubuntu=Path(), windows=Path()):
     files = []
+    item = namedtuple('item', 'name, date, system')
     if _is_there(windows):
-        files.append((windows.name, _get_modified_date(windows)))
+        files.append(item(name=windows.name, date=_get_modified_date(windows), system='Windows'))
     if _is_there(ubuntu):
-        files.append((ubuntu.name, _get_modified_date(ubuntu)))
+        files.append(item(name=ubuntu.name, date=_get_modified_date(ubuntu), system='Ubuntu Linux'))
     if _is_there(suse):
-        files.append((suse.name, _get_modified_date(suse)))
+        files.append(item(name=suse.name, date=_get_modified_date(suse), system='OpenSuSE Linux'))
     if _is_there(mac):
-        files.append((mac.name, _get_modified_date(mac)))
+        files.append(item(name=mac.name, date=_get_modified_date(mac), system='MacOS'))
     return files
 
 
