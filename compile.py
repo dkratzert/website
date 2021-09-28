@@ -118,7 +118,6 @@ if __name__ == "__main__":
                                     ],
                           mergecontexts=True,
                           )
-    print(Path('.').resolve())
     shutil.copytree(Path('./pictures'), Path(outpath).joinpath('pictures'), dirs_exist_ok=True)
     shutil.copytree(Path('./files'), Path(outpath).joinpath('files'), dirs_exist_ok=True)
 

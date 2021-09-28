@@ -4,23 +4,25 @@
 
     <h1>StructureFinder</h1>
 
-    <p>StructureFinder indexes all .cif and/or .res files below a certain directory(s) and makes them searchable.
+    <p>
+        StructureFinder indexes all .cif and/or .res files below a certain directory(s) and makes them searchable.
         Additionally, it is able to search for unit cells in the Bruker
         APEX2/3 software database.
     </p>
-    <p>You may cite StructureFinder as </p>
-    <p><a class="external-link" href="https://doi.org/10.1107/S1600576719001638" target="_blank" title="">
-        D. Kratzert, I. Krossing,<em> J. Appl. Cryst.</em> <strong>2019</strong>,
-        <em>52</em>, 468-471. https://doi.org/10.1107/S1600576719001638.</a>
-        <a class="external-link" href="https://www.xs3-data.uni-freiburg.de/structurefinder/structurefinder_reprint.pdf"
-           target="_blank" title="">(local copy)</a></p>
 
     <h4>Downloads</h4>
-
     {% include 'partials/files_table.html' %}
 
-    <p></p>
+    <h4>Recent Changes</h4>
+    <p>
+        <a href="https://github.com/dkratzert/StructureFinder/raw/master/misc/changes.txt">Changelog</a>
+    </p>
     <h4>Screenshots</h4>
+    <p>
+        <a href="{{ 'pictures/structurefinder/strf_1.png' }}" target="_self" title="">
+            <img src="{{ 'pictures/structurefinder/strf_1.png' }}" alt="" width="80%"/>
+        </a>
+    </p>
     <p>In the main tab, you can import cif files to a database, you can save this database, you can open an existing database or open the APEX2/3 database on your computer. To
         search the APEX database, just click on the 'Open APEX Database' button. The program will try to connect the database on the local computer with the default username and
         password. If that fails, it will ask for a different.</p>
@@ -36,13 +38,9 @@
         <p><strong>regular</strong><br/>volume: ±3 %, length: 0.06 Å, angle: 1.0°</p>
         <p><strong>more results option</strong><br/>volume: ±9 %, length: 0.2 Å, angle: 2.0°</p>
     </div>
-    The text search field searches in the directory, name and .res file text data. You can concatenate words with ? and *. For example foo*bar means 'foo[any text]bar'.
+    <p>The text search field searches in the directory, name and .res file text data. You can concatenate words with ? and *.
+        For example foo*bar means 'foo[any text]bar'.</p>
 
-    <p>
-        <a href="{{ 'pictures/structurefinder/strf_1.png' }}" target="_self" title="">
-            <img src="{{ 'pictures/structurefinder/strf_1.png' }}" alt="" width="80%"/>
-        </a>
-    </p>
     <p><span>Pro tip: Double click on the unit cell to copy the cell to the clip board.</span></p>
     <p></p>
     <p></p>
@@ -100,23 +98,21 @@ optional arguments:
     <p></p>
 
     <h4>Database Format</h4>
-    <p>The database format is just plain sqlite (<a class="external-link" href="http://www.sqlite.org/" target="_self" title="">http://www.sqlite.org/</a>). You can view the
-        database structure with the fantastic sqlitebrowser (<a class="external-link" href="http://sqlitebrowser.org/" target="_self" title="">http://sqlitebrowser.org/</a>).</p>
+    <p>The database format is just plain sqlite (<a href="http://www.sqlite.org/" target="_self" title="">http://www.sqlite.org/</a>). You can view the
+        database structure with the fantastic sqlitebrowser (<a href="http://sqlitebrowser.org/" target="_self" title="">http://sqlitebrowser.org/</a>).</p>
     <p>The database structure is not supposed to change, but I might add compression to the file format in the future. </p>
 
     <h4>CSD search</h4>
     <p>StructureFinder is able to search for unit cells in the CSD with the
-        <a class="external-link"
-           href="http://www.ccdc.cam.ac.uk/Community/csd-community/cellcheckcsd/" target="_blank"
+        <a href="http://www.ccdc.cam.ac.uk/Community/csd-community/cellcheckcsd/" target="_blank"
            title="">CellCheckCSD </a>program. As soon as
-        <a class="external-link"
-           href="http://www.ccdc.cam.ac.uk/Community/csd-community/cellcheckcsd/"
+        <a href="http://www.ccdc.cam.ac.uk/Community/csd-community/cellcheckcsd/"
            target="_blank" title="">CellCheckCSD
         </a>is installed, you can search the CSD. Double-Click on a result row to get the detailed structure page.</p>
 
     <h4>Web interface</h4>
     <p>Instead of the regular user interface, you can run StructureFinder as web service. First, create a database with <em>strf_cmd.py.</em> This can be automated
-        with a <a class="external-link" href="https://en.wikipedia.org/wiki/Cron" target="_blank" title="">cron job</a> to do it regularly. The zip file strf_cmd_version.zip above
+        with a <a href="https://en.wikipedia.org/wiki/Cron" target="_blank" title="">cron job</a> to do it regularly. The zip file strf_cmd_version.zip above
         contains all you need to start the web service or use the Git repository. The web interface needs the Gunicorn WSGI HTTP Server to be installed (via "pip install
         gunicorn").<em></em></p>
     <p><span></span>Change the variables</p>
@@ -138,9 +134,15 @@ optional arguments:
     <p>If you want to open the same database file with the Windows version, you can add the database file as command line parameter in the start menu shortcut:</p>
     <p><img src="{{ 'pictures/structurefinder/strf_symbol_prop.png' }}" alt="" width="40%"/></p>
 
-    <h4>Recent Changes</h4>
+    <h4>You may cite StructureFinder as </h4>
     <p>
-        <a href="https://github.com/dkratzert/StructureFinder/raw/master/misc/changes.txt">Changelog</a>
+        <a href="https://doi.org/10.1107/S1600576719001638" target="_blank" title="">
+            D. Kratzert, I. Krossing,<em> J. Appl. Cryst.</em> <strong>2019</strong>, <em>52</em>, 468-471.
+            https://doi.org/10.1107/S1600576719001638.
+        </a>
+        <a href="https://www.xs3-data.uni-freiburg.de/structurefinder/structurefinder_reprint.pdf"
+           target="_blank" title="">(local copy)
+        </a>
     </p>
 
     <h4>License</h4>
