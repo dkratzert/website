@@ -107,6 +107,7 @@ def _get_files_context(mac=Path(), suse=Path(), ubuntu=Path(), windows=Path(), o
 
 if __name__ == "__main__":
     if sys.platform == 'linux':
+        os.system('git pull')
         outpath = '/var/www/html/rendered'
     else:
         outpath = 'rendered'
