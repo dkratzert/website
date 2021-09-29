@@ -121,6 +121,7 @@ if __name__ == "__main__":
                                     ],
                           mergecontexts=True,
                           )
+    shutil.rmtree(outpath, ignore_errors=True)
     print('---> copy files to', outpath)
     p = shutil.copytree(Path('./pictures'), Path(outpath).joinpath('pictures'), dirs_exist_ok=True)
     print(p)
