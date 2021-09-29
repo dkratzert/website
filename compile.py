@@ -111,10 +111,11 @@ def _get_files_context(mac=Path(), suse=Path(), ubuntu=Path(), windows=Path(), o
 
 
 if __name__ == "__main__":
-    if 'linux' in sys.platform:
-        outpath = 'rendered'
-    else:
+    if  sys.platform == 'linux':
         outpath = '/var/www/html/rendered'
+    else:
+        outpath = 'rendered'
+
 
     site = Site.make_site(searchpath='dkratzert/templates',
                           outpath=outpath,
