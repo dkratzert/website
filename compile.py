@@ -5,7 +5,14 @@ from collections import namedtuple
 from datetime import datetime
 from pathlib import Path
 
+import markdown as markdown
+import requests as requests
+from markdown.extensions.codehilite import CodeHiliteExtension
+from markdown.extensions.fenced_code import FencedCodeExtension
 from staticjinja import Site
+
+# noinspection PyTypeChecker
+markdowner = markdown.Markdown(output_format="html5", extensions=[FencedCodeExtension(), CodeHiliteExtension()])
 
 
 def base(template):
@@ -36,6 +43,19 @@ def _get_version_number(base_path):
         return version_txt.read_text()
     else:
         return '0'
+
+
+def shelxfile(template):
+    markdown_content = Path(template.filename).read_text()
+    return {"shelxfile_html": markdowner.convert(markdown_content)}
+
+
+def render_md(site, template, **kwargs):
+    # i.e. posts/post1.md -> build/posts/post1.html
+    out = site.outpath / Path(template.name).with_suffix(".html")
+    # Compile and stream the result
+    os.makedirs(out.parent, exist_ok=True)
+    site.get_template("shelxfile.html").stream(**kwargs).dump(str(out), encoding="utf-8")
 
 
 def dsr(template):
@@ -111,14 +131,19 @@ if __name__ == "__main__":
         outpath = '/var/www/html/rendered'
     else:
         outpath = 'rendered'
+    r = requests.get('https://raw.githubusercontent.com/dkratzert/ShelXFile/master/README.md')
+    p = Path('templates/shelxfile.md')
+    p.write_bytes(r.content)
 
     site = Site.make_site(searchpath='dkratzert/templates',
                           outpath=outpath,
-                          contexts=[('.*.html', base),
+                          contexts=[(r'.*\.html', base),
                                     ('structurefinder.html', structurefinder),
                                     ('dsr.html', dsr),
                                     ('finalcif.html', finalcif),
+                                    (r".*\.md", shelxfile),
                                     ],
+                          rules=[(r".*\.md", render_md)],
                           mergecontexts=True,
                           )
     shutil.rmtree(outpath, ignore_errors=True)
