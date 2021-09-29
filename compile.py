@@ -1,5 +1,6 @@
 import os
 import shutil
+import sys
 from collections import namedtuple
 from datetime import datetime
 from pathlib import Path
@@ -110,7 +111,11 @@ def _get_files_context(mac=Path(), suse=Path(), ubuntu=Path(), windows=Path(), o
 
 
 if __name__ == "__main__":
-    outpath = 'rendered'
+    if 'linux' in sys.platform:
+        outpath = 'rendered'
+    else:
+        outpath = '/var/www/html/rendered'
+
     site = Site.make_site(searchpath='dkratzert/templates',
                           outpath=outpath,
                           contexts=[('.*.html', base),
@@ -121,8 +126,9 @@ if __name__ == "__main__":
                                     ],
                           mergecontexts=True,
                           )
+    print('---> copy files to', outpath)
     shutil.copytree(Path('./pictures'), Path(outpath).joinpath('pictures'), dirs_exist_ok=True)
     shutil.copytree(Path('./files'), Path(outpath).joinpath('files'), dirs_exist_ok=True)
-
+    print('------------')
     # enable automatic reloading
     site.render(use_reloader=True)
