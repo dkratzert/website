@@ -114,7 +114,6 @@ if __name__ == "__main__":
     site = Site.make_site(searchpath='dkratzert/templates',
                           outpath=outpath,
                           contexts=[('.*.html', base),
-                                    ('index.html', index),
                                     ('structurefinder.html', structurefinder),
                                     ('dsr.html', dsr),
                                     ('finalcif.html', finalcif),
