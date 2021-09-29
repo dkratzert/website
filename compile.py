@@ -44,7 +44,7 @@ def _get_version_number(base_path):
 
 def dsr(template):
     context = {}
-    base_path = Path('./files/dsr')
+    base_path = Path('./rendered').joinpath(Path('./files/dsr'))
     windows = _get_executable(base_path, 'DSR-setup*.exe')
     ubuntu = _get_executable(base_path, 'dsr*.deb')
     suse = _get_executable(base_path, 'DSR*.rpm')
@@ -52,7 +52,7 @@ def dsr(template):
     files = _get_files_context(mac, suse, ubuntu, windows)
     context.update(
         {'version'  : _get_version_number(base_path),
-         'link_base': Path('./rendered').joinpath(base_path),
+         'link_base': base_path,
          'files'    : files
          }
     )
@@ -67,7 +67,7 @@ def structurefinder(template):
     suse = _get_executable(base_path, 'StructureFinder*_opensuse')
     mac = _get_executable(base_path, 'StructureFinder*macos.app.zip')
     other1 = _get_executable(base_path, 'strf_cmd*.zip')
-    # print(base_path, windows, '###')
+    print(base_path, windows, '###')
     files = _get_files_context(mac, suse, ubuntu, windows, other1=other1)
     context.update(
         {'version'  : _get_version_number(base_path),
