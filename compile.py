@@ -26,7 +26,7 @@ def _get_modified_date(os_path: Path) -> str:
 
 
 def _get_executable(base_path: Path, pattern: str) -> Path:
-    paths = list(base_path.glob(pattern))
+    paths = list(Path(outpath).joinpath(base_path).glob(pattern))
     return paths[0] if paths else Path()
 
 
@@ -44,7 +44,7 @@ def _get_version_number(base_path):
 
 def dsr(template):
     context = {}
-    base_path = Path('./rendered').joinpath(Path('./files/dsr'))
+    base_path = Path('./files/dsr')
     windows = _get_executable(base_path, 'DSR-setup*.exe')
     ubuntu = _get_executable(base_path, 'dsr*.deb')
     suse = _get_executable(base_path, 'DSR*.rpm')
