@@ -13,12 +13,8 @@ def base(template):
     date = datetime.fromtimestamp(template_mtime)
     return {
         'template_date': date.strftime('%Y-%m-%d'),
-        'title'        : 'MySite',
+        'title'        : 'Daniel Kratzerts SC-XRD tools',
     }
-
-
-def index(template):
-    return {'title': 'MySite - Index'}
 
 
 def _get_modified_date(os_path: Path) -> str:
@@ -111,11 +107,10 @@ def _get_files_context(mac=Path(), suse=Path(), ubuntu=Path(), windows=Path(), o
 
 
 if __name__ == "__main__":
-    if  sys.platform == 'linux':
+    if sys.platform == 'linux':
         outpath = '/var/www/html/rendered'
     else:
         outpath = 'rendered'
-
 
     site = Site.make_site(searchpath='dkratzert/templates',
                           outpath=outpath,
