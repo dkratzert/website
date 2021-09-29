@@ -87,7 +87,7 @@ def finalcif(template):
     files = _get_files_context(mac, suse, ubuntu, windows)
     context.update(
         {'version'  : _get_version_number(base_path),
-         'link_base': Path('./rendered').joinpath(base_path),
+         'link_base': base_path,
          'files'    : files
          }
     )
