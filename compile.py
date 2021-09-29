@@ -128,8 +128,10 @@ if __name__ == "__main__":
                           mergecontexts=True,
                           )
     print('---> copy files to', outpath)
-    shutil.copytree(Path('./pictures'), Path(outpath).joinpath('pictures'), dirs_exist_ok=True)
-    shutil.copytree(Path('./files'), Path(outpath).joinpath('files'), dirs_exist_ok=True)
+    p = shutil.copytree(Path('./pictures'), Path(outpath).joinpath('pictures'), dirs_exist_ok=True)
+    print(p)
+    p = shutil.copytree(Path('./files'), Path(outpath).joinpath('files'), dirs_exist_ok=True)
+    print(p)
     print('------------')
     # enable automatic reloading
     site.render(use_reloader=True)
