@@ -20,19 +20,25 @@
 
 {% include 'partials/navigation.html' %}
 
-<div class="container-md">
+<div class="container">
     <div class="row align-items-start">
-        <div class="col-2">
+        <div class="col-md-2">
 
         </div>
         <div class="col">
             {% block content %}
             {% endblock %}
+            <div class="footer pt-5">
+                This page was renderd with <a target="_blank" href="https://staticjinja.readthedocs.io/en/stable/">staticjinja</a>.
+            </div>
         </div>
-        <div class="col-2">
+        <div class="col-md-2">
 
         </div>
+
+
     </div>
+
 </div>
 
 

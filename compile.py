@@ -65,8 +65,9 @@ def structurefinder(template):
     ubuntu = _get_executable(base_path, 'StructureFinder*_ubuntu')
     suse = _get_executable(base_path, 'StructureFinder*_opensuse')
     mac = _get_executable(base_path, 'StructureFinder*macos.app.zip')
+    other1 = _get_executable(base_path, 'strf_cmd*.zip')
     # print(base_path, windows, '###')
-    files = _get_files_context(mac, suse, ubuntu, windows)
+    files = _get_files_context(mac, suse, ubuntu, windows, other1=other1)
     context.update(
         {'version'  : _get_version_number(base_path),
          'link_base': base_path,
@@ -92,7 +93,7 @@ def finalcif(template):
     return context
 
 
-def _get_files_context(mac=Path(), suse=Path(), ubuntu=Path(), windows=Path()):
+def _get_files_context(mac=Path(), suse=Path(), ubuntu=Path(), windows=Path(), other1=Path()):
     files = []
     item = namedtuple('item', 'name, date, system')
     if _is_there(windows):
@@ -103,6 +104,8 @@ def _get_files_context(mac=Path(), suse=Path(), ubuntu=Path(), windows=Path()):
         files.append(item(name=suse.name, date=_get_modified_date(suse), system='OpenSuSE Linux'))
     if _is_there(mac):
         files.append(item(name=mac.name, date=_get_modified_date(mac), system='MacOS'))
+    if _is_there(other1):
+        files.append(item(name=other1.name, date=_get_modified_date(other1), system='Web Interface'))
     return files
 
 
