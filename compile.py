@@ -44,7 +44,7 @@ def _get_version_number(base_path):
 
 def dsr(template):
     context = {}
-    base_path = Path('./files/dsr')
+    base_path = Path(outpath).joinpath(Path('./files/dsr'))
     windows = _get_executable(base_path, 'DSR-setup*.exe')
     ubuntu = _get_executable(base_path, 'dsr*.deb')
     suse = _get_executable(base_path, 'DSR*.rpm')
@@ -61,7 +61,7 @@ def dsr(template):
 
 def structurefinder(template):
     context = {}
-    base_path = Path('./files/structurefinder/')
+    base_path = Path(outpath).joinpath(Path('./files/structurefinder/'))
     windows = _get_executable(base_path, 'StructureFinder-*.exe')
     ubuntu = _get_executable(base_path, 'StructureFinder*_ubuntu')
     suse = _get_executable(base_path, 'StructureFinder*_opensuse')
@@ -79,7 +79,7 @@ def structurefinder(template):
 
 def finalcif(template):
     context = {}
-    base_path = Path('./files/finalcif')
+    base_path = Path(outpath).joinpath(Path('./files/finalcif'))
     windows = _get_executable(base_path, 'FinalCif-setup-x64*.exe')
     ubuntu = _get_executable(base_path, 'FinalCif*ubuntu')
     suse = _get_executable(base_path, 'FinalCif*opensuse')
