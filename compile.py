@@ -63,7 +63,6 @@ def structurefinder(template):
     suse = _get_executable(base_path, 'StructureFinder*_opensuse')
     mac = _get_executable(base_path, 'StructureFinder*macos.app.zip')
     other1 = _get_executable(base_path, 'strf_cmd*.zip')
-    print(base_path, windows, '###')
     files = _get_files_context(mac, suse, ubuntu, windows, other1=other1)
     context.update(
         {'version'  : _get_version_number(base_path),
