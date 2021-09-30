@@ -132,7 +132,7 @@ if __name__ == "__main__":
     else:
         outpath = 'rendered'
     r = requests.get('https://raw.githubusercontent.com/dkratzert/ShelXFile/master/README.md')
-    p = Path('templates/shelxfile.md')
+    p = Path('dkratzert/templates/shelxfile.md')
     p.write_bytes(r.content)
 
     site = Site.make_site(searchpath='dkratzert/templates',
@@ -148,9 +148,9 @@ if __name__ == "__main__":
                           )
     shutil.rmtree(outpath, ignore_errors=True)
     print('---> copy files to', outpath)
-    p = shutil.copytree(Path('./pictures'), Path(outpath).joinpath('pictures'), dirs_exist_ok=True)
+    p = shutil.copytree(Path('./dkratzert/pictures'), Path(outpath).joinpath('pictures'), dirs_exist_ok=True)
     print(p)
-    p = shutil.copytree(Path('./files'), Path(outpath).joinpath('files'), dirs_exist_ok=True)
+    p = shutil.copytree(Path('./dkratzert/files'), Path(outpath).joinpath('files'), dirs_exist_ok=True)
     print(p)
     print('------------')
     # enable automatic reloading
