@@ -1,3 +1,5 @@
+import distutils.log
+import distutils.dir_util
 import os
 import shutil
 import sys
@@ -150,8 +152,18 @@ if __name__ == "__main__":
     print('---> copy files to', outpath)
     p = shutil.copytree(Path('./dkratzert/pictures'), Path(outpath).joinpath('pictures'), dirs_exist_ok=True)
     print(p)
-    p = shutil.copytree(Path('./dkratzert/files'), Path(outpath).joinpath('files'), dirs_exist_ok=True)
-    print(p)
+    #p = shutil.copytree(Path('./dkratzert/files'), Path(outpath).joinpath('files'), dirs_exist_ok=True)
+    #print(p)
+    src_dir = Path('./dkratzert/files')
+    dst_dir = Path(outpath).joinpath('files')
+    print(dst_dir)
+    distutils.log.set_verbosity(distutils.log.DEBUG)
+    distutils.dir_util.copy_tree(
+        str(src_dir),
+        str(dst_dir),
+        update=1,
+        verbose=1,
+    )
     print('------------')
     # enable automatic reloading
     site.render(use_reloader=True)
