@@ -127,6 +127,25 @@ def _get_files_context(mac=Path(), suse=Path(), ubuntu=Path(), windows=Path(), o
     return files
 
 
+def copy_new_files_and_pics():
+    # Copy pictures:
+    print('---> Copy pictures and files to', outpath)
+    pics = shutil.copytree(Path('./dkratzert/pictures'), Path(outpath).joinpath('pictures'), dirs_exist_ok=True)
+    print(pics)
+    # Copy files verbose:
+    src_dir = Path('./dkratzert/files')
+    dst_dir = Path(outpath).joinpath('files')
+    print(dst_dir)
+    distutils.log.set_verbosity(distutils.log.DEBUG)
+    distutils.dir_util.copy_tree(
+        str(src_dir),
+        str(dst_dir),
+        update=1,
+        verbose=1,
+    )
+    print('------------')
+
+
 if __name__ == "__main__":
     if sys.platform == 'linux':
         os.system('git pull')
@@ -149,21 +168,6 @@ if __name__ == "__main__":
                           mergecontexts=True,
                           )
     shutil.rmtree(outpath, ignore_errors=True)
-    print('---> copy files to', outpath)
-    p = shutil.copytree(Path('./dkratzert/pictures'), Path(outpath).joinpath('pictures'), dirs_exist_ok=True)
-    print(p)
-    #p = shutil.copytree(Path('./dkratzert/files'), Path(outpath).joinpath('files'), dirs_exist_ok=True)
-    #print(p)
-    src_dir = Path('./dkratzert/files')
-    dst_dir = Path(outpath).joinpath('files')
-    print(dst_dir)
-    distutils.log.set_verbosity(distutils.log.DEBUG)
-    distutils.dir_util.copy_tree(
-        str(src_dir),
-        str(dst_dir),
-        update=1,
-        verbose=1,
-    )
-    print('------------')
+    copy_new_files_and_pics()
     # enable automatic reloading
     site.render(use_reloader=True)
