@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /index.html
+Allow: /dsr.html
+Allow: /structurefinder.html
+Allow: /finalcif.html
+Allow: /fragmentdb.html
+Allow: /shelxfile.html
