@@ -149,7 +149,7 @@ def copy_new_files_and_pics():
 if __name__ == "__main__":
     if sys.platform == 'linux':
         os.system('git pull')
-        outpath = '/var/www/html/rendered'
+        outpath = '/var/www/html/'
     else:
         outpath = 'rendered'
     r = requests.get('https://raw.githubusercontent.com/dkratzert/ShelXFile/master/README.md')
