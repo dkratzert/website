@@ -74,6 +74,7 @@ def dsr(template):
          'files'    : files
          }
     )
+    print('Rendering DSR')
     return context
 
 
@@ -91,6 +92,7 @@ def structurefinder(template):
          'link_base': base_path,
          'files'    : files
          })
+    print('Rendering StructureFinder')
     return context
 
 
@@ -108,6 +110,7 @@ def finalcif(template):
          'files'    : files
          }
     )
+    print('Rendering FinalCif')
     return context
 
 

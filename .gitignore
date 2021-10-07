@@ -115,3 +115,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 dkratzert/templates/shelxfile.md
+old_xs3_versions
+database.pickle
