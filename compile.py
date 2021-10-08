@@ -4,6 +4,7 @@ import os
 import shutil
 import sys
 from collections import namedtuple
+from contextlib import suppress
 from datetime import datetime
 from pathlib import Path
 
@@ -148,6 +149,8 @@ def copy_new_files_and_pics():
     )
     shutil.copy2('./dkratzert/pictures/favicon.png', Path(outpath))
     shutil.copy2('./dkratzert/pictures/favicon.ico', Path(outpath))
+    with suppress(Exception):
+        shutil.copy2(list(Path('../').glob('google*.html'))[0], Path(outpath))
     print('------------')
 
 
