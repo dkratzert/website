@@ -3,19 +3,16 @@ import pickle
 import sqlite3
 from contextlib import suppress
 from pathlib import Path
-from pprint import pprint
 
 from lars import apache
 
 log_format = '%a - %u %t "%r" %>s %O "%{Referer}i" "%{User-agent}i"'
 database_pickle = 'database.pickle'
+counts_pickle = 'download_counts.pickle'
 
 
 def get_logfile_rows() -> dict:
-    if Path('database.pickle').exists():
-        rows = load_rows()
-    else:
-        rows = {}
+    rows = load_dumped_rows(database_pickle)
     with io.open('/Users/daniel/Documents/access2.log', 'r') as infile:
         with apache.ApacheSource(source=infile, log_format=log_format) as source:
             for row in source:
@@ -39,8 +36,16 @@ def get_logfile_rows() -> dict:
     return rows
 
 
-def dump_rows(rows):
-    with open(database_pickle, 'wb') as f:
+def load_dumped_rows(filename):
+    if Path(filename).exists():
+        rows = load_rows()
+    else:
+        rows = {}
+    return rows
+
+
+def dump_rows(filename: str, rows: dict):
+    with open(filename, 'wb') as f:
         pickle.dump(rows, f, pickle.HIGHEST_PROTOCOL)
 
 
@@ -50,26 +55,26 @@ def load_rows():
     return data
 
 
-def count_finalcif(rows):
-    """
-    TODO: make general
-    """
-    prog = {'finalcif': 0}
+def count_downloads(rows):
+    prog = {}
     for time, value in rows.items():
-        # print(value)
         with suppress(Exception):
-            name = Path(value[1]).name
-            if name.lower().startswith('finalcif'):
-                prog['finalcif'] = prog['finalcif'] + 1
+            filename = Path(value[1]).name
+            if filename == 'docs':
+                continue
+            name = filename.split('-')[0].lower().split('-')[0]
+            if name not in prog:
+                prog[name] = 0
+            prog[name] = prog[name] + 1
     return prog
 
 
 if __name__ == '__main__':
     rows = get_logfile_rows()
-    dump_rows(rows)
+    dump_rows(database_pickle, rows)
     # data = load_rows()
-    pprint(rows)
+    # pprint(rows)
     print('Number of downloads:', len(rows))
-
-    prog = count_finalcif(rows)
+    prog = count_downloads(rows)
     print(prog)
+    dump_rows(counts_pickle, prog)
