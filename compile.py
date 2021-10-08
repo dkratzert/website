@@ -146,6 +146,8 @@ def copy_new_files_and_pics():
         update=1,
         verbose=1,
     )
+    shutil.copy2('./dkratzert/pictures/favicon.png', Path(outpath))
+    shutil.copy2('./dkratzert/pictures/favicon.ico', Path(outpath))
     print('------------')
 
 
