@@ -84,6 +84,9 @@ if __name__ == '__main__':
         sys.exit()
     else:
         logfile = args.log
+        if not Path(logfile).exists():
+            print('Logfile {} not found.'.format(logfile))
+            sys.exit()
         if not Path(database_pickle_file).exists() and args.force:
             previous_rows = {}
         else:
