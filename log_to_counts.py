@@ -1,3 +1,4 @@
+import datetime
 import io
 import pickle
 import sys
@@ -107,5 +108,6 @@ if __name__ == '__main__':
         lines.append('{:>28}: {:<5}'.format(key.capitalize(), val))
     joined = '\n'.join(lines)
     print(joined)
-    Path('./stats.txt').write_text('Number of downloads: '
-                                   '{}\n--------------------------------\n'.format(len(log_rows)) + joined)
+    Path('./stats.txt').write_text('Number of downloads: {} -> '
+                                   '{}\n--------------------------------\n'.format(len(log_rows),
+                                                                                   datetime.datetime.now()) + joined)
