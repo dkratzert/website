@@ -28,7 +28,7 @@ def get_logfile_rows(logfile, old_rows) -> dict:
                     or path.endswith('.woff2') \
                     or path.endswith('.css'):
                     continue
-                print(row)
+                # print(row)
                 # print(Path(path).name)
                 old_rows[row.time] = (
                     row.remote_ip, row.request.url.path_str, row.bytes_sent, row.req_User_agent, row.status)
