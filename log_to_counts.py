@@ -28,10 +28,10 @@ def get_logfile_rows(logfile, old_rows) -> dict:
                     or path.endswith('.woff2') \
                     or path.endswith('.css'):
                     continue
-                # print(row)
+                print(row)
                 # print(Path(path).name)
                 old_rows[row.time] = (
-                row.remote_ip, row.request.url.path_str, row.bytes_sent, row.req_User_agent, row.status)
+                    row.remote_ip, row.request.url.path_str, row.bytes_sent, row.req_User_agent, row.status)
     return old_rows
 
 
@@ -57,7 +57,7 @@ def load_rows():
 
 def count_downloads(rows):
     prog = {}
-    #print(rows)
+    # print(rows)
     for time, value in rows.items():
         with suppress(Exception):
             filename = Path(value[1]).name
