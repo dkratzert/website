@@ -1,18 +1,18 @@
 import io
 import pickle
+import sys
+from argparse import ArgumentParser
 from contextlib import suppress
 from pathlib import Path
 
 from lars import apache
 
 log_format = '%a - %u %t "%r" %>s %O "%{Referer}i" "%{User-agent}i"'
-database_pickle = 'database.pickle'
+database_pickle_file = 'database.pickle'
 counts_pickle = 'download_counts.pickle'
-logfile = '/Users/daniel/Documents/access.log'
 
 
-def get_logfile_rows(logfile) -> dict:
-    rows = load_dumped_rows(database_pickle)
+def get_logfile_rows(logfile, old_rows) -> dict:
     with io.open(logfile, 'r') as infile:
         with apache.ApacheSource(source=infile, log_format=log_format) as source:
             for row in source:
@@ -30,16 +30,17 @@ def get_logfile_rows(logfile) -> dict:
                     continue
                 # print(row)
                 # print(Path(path).name)
-                rows[row.time] = (
+                old_rows[row.time] = (
                 row.remote_ip, row.request.url.path_str, row.bytes_sent, row.req_User_agent, row.status)
-    return rows
+    return old_rows
 
 
 def load_dumped_rows(filename):
     if Path(filename).exists():
         rows = load_rows()
     else:
-        rows = {}
+        print('Pickled database not found!')
+        sys.exit()
     return rows
 
 
@@ -49,7 +50,7 @@ def dump_rows(filename: str, rows: dict):
 
 
 def load_rows():
-    with open(database_pickle, 'rb') as f:
+    with open(database_pickle_file, 'rb') as f:
         data = pickle.load(f)
     return data
 
@@ -71,14 +72,30 @@ def count_downloads(rows):
 
 
 if __name__ == '__main__':
-    # TODO: accumulate rows in pickled file
-    rows = get_logfile_rows(logfile)
-    dump_rows(database_pickle, rows)
+    parser = ArgumentParser()
+    parser.add_argument('-l', '--log', help='Logfile to analyze', type=str)
+    parser.add_argument('-f', '--force', help='Force, even if logfile is new', type=str)
+    parser.add_argument('-p', '--print', help='Prints statistics', type=str)
+    parser.add_argument('-d', '--dump', help='path to dump files', type=str)
+    args = parser.parse_args()
+    if not args.log:
+        logfile = None
+        parser.print_help()
+        sys.exit()
+    else:
+        logfile = args.log
+        if not Path(logfile).exists() and args.force:
+            previous_rows = {}
+        else:
+            previous_rows = load_dumped_rows(database_pickle_file)
+
+    log_rows = get_logfile_rows(logfile, previous_rows)
+    dump_rows(database_pickle_file, log_rows)
     # data = load_rows()
     # pprint(rows)
     print('---------------------------------')
-    print('\n\nNumber of downloads:', len(rows))
-    prog = count_downloads(rows)
+    print('\n\nNumber of downloads:', len(log_rows))
+    prog = count_downloads(log_rows)
     dump_rows(counts_pickle, prog)
     print('---------------------------------')
     prog = dict(sorted(prog.items(), key=lambda item: item[1], reverse=True))
