@@ -84,7 +84,7 @@ if __name__ == '__main__':
         sys.exit()
     else:
         logfile = args.log
-        if not Path(logfile).exists() and args.force:
+        if not Path(database_pickle_file).exists() and args.force:
             previous_rows = {}
         else:
             previous_rows = load_dumped_rows(database_pickle_file)
