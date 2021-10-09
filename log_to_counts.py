@@ -57,7 +57,7 @@ def load_rows():
 
 def count_downloads(rows):
     prog = {}
-    print(rows)
+    #print(rows)
     for time, value in rows.items():
         with suppress(Exception):
             filename = Path(value[1]).name
