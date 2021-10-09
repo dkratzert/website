@@ -74,7 +74,7 @@ def count_downloads(rows):
 if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument('-l', '--log', help='Logfile to analyze', type=str)
-    parser.add_argument('-f', '--force', help='Force, even if logfile is new', type=str)
+    parser.add_argument('-f', '--force', help='Force, even if logfile is new', action='store_true', default=False)
     parser.add_argument('-p', '--print', help='Prints statistics', type=str)
     parser.add_argument('-d', '--dump', help='path to dump files', type=str)
     args = parser.parse_args()
