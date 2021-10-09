@@ -102,5 +102,10 @@ if __name__ == '__main__':
     dump_rows(counts_pickle, prog)
     print('---------------------------------')
     prog = dict(sorted(prog.items(), key=lambda item: item[1], reverse=True))
+    lines = []
     for key, val in prog.items():
-        print('{:>28}: {:<5}'.format(key.capitalize(), val))
+        lines.append('{:>28}: {:<5}'.format(key.capitalize(), val))
+    joined = '\n'.join(lines)
+    print(joined)
+    Path('./stats.txt').write_text('Number of downloads: '
+                                   '{}\n--------------------------------\n'.format(len(log_rows)) + joined)
