@@ -100,7 +100,8 @@ if __name__ == '__main__':
     # pprint(rows)
     print('---------------------------------')
     prog = count_downloads(log_rows)
-    print('\n\nNumber of downloads:', sum([x for x in prog.values()]))
+    num_downloads = sum([x for x in prog.values()])
+    print('\n\nNumber of downloads:', num_downloads)
     dump_rows(counts_pickle, prog)
     print('---------------------------------')
     prog = dict(sorted(prog.items(), key=lambda item: item[1], reverse=True))
@@ -109,6 +110,5 @@ if __name__ == '__main__':
         lines.append('{:>28}: {:<5}'.format(key.capitalize(), val))
     joined = '\n'.join(lines)
     print(joined)
-    Path('./stats.txt').write_text('Number of downloads: {} -> '
-                                   '{}\n--------------------------------\n'.format(len(log_rows),
-                                                                                   datetime.datetime.now()) + joined)
+    Path('./stats.txt').write_text('Number of downloads: {} -> {}\n--------------------------------\n'
+                                   .format(num_downloads, datetime.datetime.now()) + joined)
