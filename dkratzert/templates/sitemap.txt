@@ -6,3 +6,4 @@ https://dkratzert.de/finalcif.html
 https://dkratzert.de/fragmentdb.html
 https://dkratzert.de/imprint.html
 https://dkratzert.de/shelxfile.html
+https://dkratzert.de/structurefinder.html
