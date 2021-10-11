@@ -5,6 +5,7 @@ import sys
 from argparse import ArgumentParser
 from contextlib import suppress
 from pathlib import Path
+from typing import Dict
 
 from lars import apache
 
@@ -56,7 +57,7 @@ def load_rows():
     return data
 
 
-def count_downloads(rows):
+def count_downloads(rows) -> Dict[str, int]:
     prog = {}
     # print(rows)
     for time, value in rows.items():
@@ -98,8 +99,8 @@ if __name__ == '__main__':
     # data = load_rows()
     # pprint(rows)
     print('---------------------------------')
-    print('\n\nNumber of downloads:', len(log_rows))
     prog = count_downloads(log_rows)
+    print('\n\nNumber of downloads:', sum([x for x in prog.values()]))
     dump_rows(counts_pickle, prog)
     print('---------------------------------')
     prog = dict(sorted(prog.items(), key=lambda item: item[1], reverse=True))
