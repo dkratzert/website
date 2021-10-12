@@ -101,6 +101,7 @@ if __name__ == '__main__':
     print('---------------------------------')
     prog = count_downloads(log_rows)
     num_downloads = sum([x for x in prog.values()])
+    num_downloads -= prog.get('version.txt', 0)
     print('\n\nNumber of downloads:', num_downloads)
     dump_rows(counts_pickle, prog)
     print('---------------------------------')
