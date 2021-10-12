@@ -35,7 +35,6 @@ def get_logfile_rows(logfile, old_rows) -> dict:
                 # print(Path(path).name)
                 old_rows[row.time] = (
                     row.remote_ip, row.request.url.path_str, row.bytes_sent, row.req_User_agent, row.status)
-    old_rows.pop('mystats.txt', None)
     return old_rows
 
 
@@ -67,6 +66,8 @@ def count_downloads(rows) -> Dict[str, int]:
             filename = Path(value[1]).name
             # print(filename)
             if filename == 'docs' or filename == 'favicon.ico':
+                continue
+            if 'mystats' in filename:
                 continue
             name = filename.split('-')[0].lower().split('-')[0]
             if name not in prog:
