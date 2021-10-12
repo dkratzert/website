@@ -25,6 +25,7 @@ def get_logfile_rows(logfile, old_rows) -> dict:
                     or path == '/' \
                     or path.endswith('.html') \
                     or path.endswith('robots.txt') \
+                    or path.endswith('mystats.txt') \
                     or path.endswith('.png') \
                     or path.endswith('.js') \
                     or path.endswith('.woff2') \
