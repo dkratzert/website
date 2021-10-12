@@ -24,7 +24,7 @@ def get_logfile_rows(logfile, old_rows) -> dict:
                 if row.req_User_agent and 'bot' in row.req_User_agent \
                     or path == '/' \
                     or path.endswith('.html') \
-                    or path.endswith('.txt') \
+                    or path.endswith('robots.txt') \
                     or path.endswith('.png') \
                     or path.endswith('.js') \
                     or path.endswith('.woff2') \
@@ -107,8 +107,9 @@ if __name__ == '__main__':
     prog = dict(sorted(prog.items(), key=lambda item: item[1], reverse=True))
     lines = []
     for key, val in prog.items():
-        lines.append('{:>28}: {:<5}'.format(key.capitalize(), val))
+        lines.append('{:>28}: {:<5}'.format(key, val))
     joined = '\n'.join(lines)
     print(joined)
-    Path('./stats.txt').write_text('Number of downloads: {} -> {}\n--------------------------------\n'
+    Path('./stats.txt').write_text('Start: 08.10.2021\n'
+                                   'Number of downloads: {} -> {}\n--------------------------------\n'
                                    .format(num_downloads, datetime.datetime.now()) + joined)
