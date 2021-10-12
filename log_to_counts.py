@@ -35,6 +35,7 @@ def get_logfile_rows(logfile, old_rows) -> dict:
                 # print(Path(path).name)
                 old_rows[row.time] = (
                     row.remote_ip, row.request.url.path_str, row.bytes_sent, row.req_User_agent, row.status)
+    old_rows.pop('mystats.txt', None)
     return old_rows
 
 
