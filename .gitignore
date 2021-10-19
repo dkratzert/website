@@ -119,3 +119,4 @@ old_xs3_versions
 database.pickle
 *.pickle
 stats.txt
+/rendered/
