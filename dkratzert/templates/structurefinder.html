@@ -72,7 +72,7 @@
     <h4>Command Line file Indexer</h4>
     <p>With the <em>strf_cmd.py</em> script, you can index directories without a graphical user interface.</p>
     <p>The options -d and -e can be given multiple times like -d /foo -d /bar.</p>
-    <p><em>The command line indexer only needs Python &gt;= 3.4.</em></p>
+    <p><em>The command line indexer only needs Python &gt;= 3.6.</em></p>
     <p></p>
 
     <pre>$ python3.6 strf_cmd.py
@@ -119,8 +119,8 @@ optional arguments:
     <h4>Web interface</h4>
     <p>Instead of the regular user interface, you can run StructureFinder as web service. First, create a database with <em>strf_cmd.py.</em> This can be automated
         with a <a href="https://en.wikipedia.org/wiki/Cron" target="_blank" title="">cron job</a> to do it regularly. The zip file strf_cmd_version.zip above
-        contains all you need to start the web service or use the Git repository. The web interface needs the Gunicorn WSGI HTTP Server to be installed (via "pip install
-        gunicorn").<em></em></p>
+        contains all you need to start the web service or use the Git repository. The web interface needs the Gunicorn WSGI HTTP Server and gemmi to be installed
+        (via "pip install gunicorn gemmi").<em></em></p>
     <p><span></span>Change the variables</p>
     <pre>host = "127.0.0.1"<br/>port = "80"<br/>dbfilename = "/path/to/database.sqlite"</pre>
     <p>in cgi_ui/cgi-bin/strf_web.py to your desired webserver address and database path. Some operating systems do not allow users to run services at port 80. You might
