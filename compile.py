@@ -119,13 +119,13 @@ def _get_files_context(mac=Path(), suse=Path(), ubuntu=Path(), windows=Path(), o
     files = []
     item = namedtuple('item', 'name, date, system')
     if _is_there(windows):
-        files.append(item(name=windows.name, date=_get_modified_date(windows), system='Windows'))
+        files.append(item(name=windows.name, date=_get_modified_date(windows), system='Windows 7 and up'))
     if _is_there(ubuntu):
-        files.append(item(name=ubuntu.name, date=_get_modified_date(ubuntu), system='Ubuntu Linux'))
+        files.append(item(name=ubuntu.name, date=_get_modified_date(ubuntu), system='Ubuntu Linux 16'))
     if _is_there(suse):
-        files.append(item(name=suse.name, date=_get_modified_date(suse), system='OpenSuSE Linux'))
+        files.append(item(name=suse.name, date=_get_modified_date(suse), system='OpenSuSE Linux 15.2'))
     if _is_there(mac):
-        files.append(item(name=mac.name, date=_get_modified_date(mac), system='MacOS'))
+        files.append(item(name=mac.name, date=_get_modified_date(mac), system='MacOS 11.6'))
     if _is_there(other1):
         files.append(item(name=other1.name, date=_get_modified_date(other1), system='Web Interface'))
     return files
