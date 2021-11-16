@@ -134,12 +134,22 @@ def _get_files_context(mac=Path(), suse=Path(), ubuntu=Path(), windows=Path(), o
 def copy_new_files_and_pics():
     # Copy pictures:
     print('---> Copy pictures and files to', outpath)
-    pics = shutil.copytree(Path('./dkratzert/pictures'), Path(outpath).joinpath('pictures'), dirs_exist_ok=True)
-    print(pics)
+    _copy_with_distutils(src_dir=Path('./dkratzert/pictures'), dst_dir=Path(outpath).joinpath('pictures'))
     # Copy files verbose:
     src_dir = Path('./dkratzert/files')
     dst_dir = Path(outpath).joinpath('files')
     print(dst_dir)
+    #_copy_with_distutils(src_dir, dst_dir)
+    os.system('rsync -crumv --delete-after {} {}'.format(src_dir, dst_dir))
+    shutil.copy2('./dkratzert/pictures/favicon.png', Path(outpath))
+    shutil.copy2('./dkratzert/pictures/favicon.ico', Path(outpath))
+    with suppress(Exception):
+        shutil.copy2(list(Path('../').glob('google*.html'))[0], Path(outpath))
+    print('------------')
+
+
+def _copy_with_distutils(src_dir, dst_dir):
+    shutil.rmtree(dst_dir, ignore_errors=True)
     distutils.log.set_verbosity(distutils.log.DEBUG)
     distutils.dir_util.copy_tree(
         str(src_dir),
@@ -147,11 +157,6 @@ def copy_new_files_and_pics():
         update=1,
         verbose=1,
     )
-    shutil.copy2('./dkratzert/pictures/favicon.png', Path(outpath))
-    shutil.copy2('./dkratzert/pictures/favicon.ico', Path(outpath))
-    with suppress(Exception):
-        shutil.copy2(list(Path('../').glob('google*.html'))[0], Path(outpath))
-    print('------------')
 
 
 if __name__ == "__main__":
@@ -175,7 +180,6 @@ if __name__ == "__main__":
                           rules=[(r".*\.md", render_md)],
                           mergecontexts=True,
                           )
-    shutil.rmtree(outpath, ignore_errors=True)
     copy_new_files_and_pics()
     # enable automatic reloading
     site.render(use_reloader=True)
