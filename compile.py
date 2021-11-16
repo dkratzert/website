@@ -140,7 +140,7 @@ def copy_new_files_and_pics():
     dst_dir = Path(outpath).joinpath('files')
     print(dst_dir)
     #_copy_with_distutils(src_dir, dst_dir)
-    os.system('rsync -crumv --delete-after {} {}'.format(src_dir, dst_dir))
+    os.system('rsync -rumv --delete-after {} {}'.format(src_dir, dst_dir))
     shutil.copy2('./dkratzert/pictures/favicon.png', Path(outpath))
     shutil.copy2('./dkratzert/pictures/favicon.ico', Path(outpath))
     with suppress(Exception):
