@@ -5,3 +5,17 @@ Allow: /structurefinder.html
 Allow: /finalcif.html
 Allow: /fragmentdb.html
 Allow: /shelxfile.html
+Disallow: *.exe
+Disallow: StructureFinder-v*
+Disallow: FinalCif-v*
+Disallow: DSR-*
+Disallow: *.tar.gz
+Disallow: *.gz
+Disallow: *.zip
+Disallow: *.txt
+
+User-agent: AhrefsBot
+Crawl-Delay: 450000
+
+User-agent: IonCrawl
+Crawl-Delay: 430001
