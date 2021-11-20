@@ -12,3 +12,7 @@ pre {
 #indexlist, ul, li {
     padding-bottom: 1em;
 }
+
+.footer {
+    font-size: small;
+ }
