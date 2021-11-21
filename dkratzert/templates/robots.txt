@@ -19,3 +19,6 @@ Crawl-Delay: 450000
 
 User-agent: IonCrawl
 Crawl-Delay: 430001
+
+User-agent: ZoominfoBot
+Crawl-Delay: 440003
