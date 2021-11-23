@@ -137,8 +137,8 @@ def copy_new_files_and_pics():
     _copy_with_distutils(src_dir=Path('./dkratzert/pictures'), dst_dir=Path(outpath).joinpath('pictures'))
     # Copy files verbose:
     src_dir = Path('./dkratzert/files')
-    dst_dir = Path(outpath).joinpath('files')
-    print(dst_dir)
+    dst_dir = Path(outpath)
+    print('Syncing {} into {}'.format(src_dir, dst_dir))
     #_copy_with_distutils(src_dir, dst_dir)
     print('\n-> Copy executables:')
     os.system('rsync -rumv --delete-after {} {}'.format(src_dir, dst_dir))
