@@ -5,6 +5,7 @@ Allow: /structurefinder.html
 Allow: /finalcif.html
 Allow: /fragmentdb.html
 Allow: /shelxfile.html
+Allow: /files/finalcif/docs/
 Disallow: *.exe
 Disallow: StructureFinder-v*
 Disallow: FinalCif-v*
