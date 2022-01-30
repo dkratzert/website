@@ -1,5 +1,5 @@
-import distutils.log
 import distutils.dir_util
+import distutils.log
 import os
 import shutil
 import sys
@@ -10,6 +10,7 @@ from pathlib import Path
 
 import markdown as markdown
 import requests as requests
+from jinja2 import Template
 from markdown.extensions.codehilite import CodeHiliteExtension
 from markdown.extensions.fenced_code import FencedCodeExtension
 from staticjinja import Site
@@ -48,17 +49,18 @@ def _get_version_number(base_path):
         return '0'
 
 
-def shelxfile(template):
+def md_to_html(template: Template):
     markdown_content = Path(template.filename).read_text()
-    return {"shelxfile_html": markdowner.convert(markdown_content)}
+    return {str(Path(template.name).stem) + '_html': markdowner.convert(markdown_content)}
 
 
-def render_md(site, template, **kwargs):
+def render_md(site, template: Template, **kwargs):
     # i.e. posts/post1.md -> build/posts/post1.html
-    out = site.outpath / Path(template.name).with_suffix(".html")
+    filename = Path(template.name).with_suffix(".html")
+    out = site.outpath / filename
     # Compile and stream the result
     os.makedirs(out.parent, exist_ok=True)
-    site.get_template("shelxfile.html").stream(**kwargs).dump(str(out), encoding="utf-8")
+    site.get_template(filename).stream(**kwargs).dump(str(out), encoding="utf-8")
 
 
 def dsr(template):
@@ -121,7 +123,8 @@ def _get_files_context(mac=Path(), suse=Path(), ubuntu=Path(), windows=Path(), o
     if _is_there(windows):
         files.append(item(name=windows.name, date=_get_modified_date(windows), system='Windows 7 and up'))
     if _is_there(ubuntu):
-        files.append(item(name=ubuntu.name, date=_get_modified_date(ubuntu), system='Ubuntu Linux {}'.format(ubuntu_version)))
+        files.append(
+            item(name=ubuntu.name, date=_get_modified_date(ubuntu), system='Ubuntu Linux {}'.format(ubuntu_version)))
     if _is_there(suse):
         files.append(item(name=suse.name, date=_get_modified_date(suse), system='OpenSuSE Linux 15.2'))
     if _is_there(mac):
@@ -138,8 +141,7 @@ def copy_new_files_and_pics():
     # Copy files verbose:
     src_dir = Path('./dkratzert/files')
     dst_dir = Path(outpath)
-    print('Syncing {} into {}'.format(src_dir, dst_dir))
-    #_copy_with_distutils(src_dir, dst_dir)
+    print('Syncing {} with rsync into {}'.format(src_dir, dst_dir))
     print('\n-> Copy executables:')
     os.system('rsync -rumv --delete-after {} {}'.format(src_dir, dst_dir))
     shutil.copy2('./dkratzert/pictures/favicon.png', Path(outpath))
@@ -160,15 +162,27 @@ def _copy_with_distutils(src_dir, dst_dir):
     )
 
 
+def get_shelxfile_readme():
+    r = requests.get('https://raw.githubusercontent.com/dkratzert/ShelXFile/master/README.md')
+    shelxfile_path = Path('dkratzert/templates/shelxfile.md')
+    shelxfile_path.write_bytes(r.content)
+
+
+def get_finalcif_changelog():
+    r = requests.get('https://raw.githubusercontent.com/dkratzert/FinalCif/master/docs/changelog.txt')
+    changelog_path = Path('dkratzert/templates/fcchangelog.md')
+    changelog_path.write_bytes(r.content)
+
+
 if __name__ == "__main__":
     if sys.platform == 'linux':
         os.system('git pull')
         outpath = '/var/www/html/'
     else:
         outpath = 'rendered'
-    r = requests.get('https://raw.githubusercontent.com/dkratzert/ShelXFile/master/README.md')
-    p = Path('dkratzert/templates/shelxfile.md')
-    p.write_bytes(r.content)
+
+    get_shelxfile_readme()
+    get_finalcif_changelog()
 
     site = Site.make_site(searchpath='dkratzert/templates',
                           outpath=outpath,
@@ -176,7 +190,7 @@ if __name__ == "__main__":
                                     ('structurefinder.html', structurefinder),
                                     ('dsr.html', dsr),
                                     ('finalcif.html', finalcif),
-                                    (r".*\.md", shelxfile),
+                                    (r".*\.md", md_to_html),
                                     ],
                           rules=[(r".*\.md", render_md)],
                           mergecontexts=True,
