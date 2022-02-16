@@ -134,7 +134,7 @@ def _get_files_context(mac=Path(), suse=Path(), ubuntu=Path(), windows=Path(), o
     return files
 
 
-def copy_new_files_and_pics():
+def copy_new_files_and_pics(outpath):
     # Copy pictures:
     print('---> Copy pictures and files to', outpath)
     _copy_with_distutils(src_dir=Path('./dkratzert/pictures'), dst_dir=Path(outpath).joinpath('pictures'))
@@ -195,6 +195,6 @@ if __name__ == "__main__":
                           rules=[(r".*\.md", render_md)],
                           mergecontexts=True,
                           )
-    copy_new_files_and_pics()
+    copy_new_files_and_pics(outpath)
     # enable automatic reloading
     site.render(use_reloader=True)
