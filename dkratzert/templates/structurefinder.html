@@ -23,13 +23,11 @@
             <img src="{{ 'pictures/structurefinder/strf_1.png' }}" alt="StructureFinder main window" width="80%"/>
         </a>
     </p>
-    <p>In the main tab, you can import <a href="https://www.iucr.org/resources/cif/dictionaries" >CIF</a> files to a database,
-        you can save this database, you can open an existing database or open the APEX2/3 database on your computer. To
-        search the APEX database, just click on the 'Open APEX Database' button. The program will try to connect the database
-        on the local computer with the default username and
-        password. If that fails, it will ask for a different.</p>
+    <p>In the main tab, you can import <a href="https://www.iucr.org/resources/cif/dictionaries" >CIF</a> and SHELX .res files
+        to a database, you can save this database.</p>
     <p>Selecting a certain entry of the database shows the unit cell, the residuals and the asymmetric unit.</p>
-    <p>Basic search options for unit cells and text is also available. The cell search takes six parameters <em>a</em>, <em>b</em>, <em>c</em>, <em>α</em>, <em>β,</em> <em>γ</em>.
+    <p>Basic search options for unit cells and text is also available. The cell search takes six parameters <em>a</em>,
+        <em>b</em>, <em>c</em>, <em>α</em>, <em>β,</em> <em>γ</em>.
         The search is unsharp so 10 10 10 90 90 90 would find the same cell as 10.00 10.00 10.00 90.00 90.00 90.00.</p>
     <div>The algorithm is a combination of a cell comparison by volume first (for speed) and subsequent matching.
         The lattice matching implementation was made by the <a href="http://pymatgen.org/">http://pymatgen.org/</a> project.
@@ -75,7 +73,7 @@
     <p><em>The command line indexer only needs Python &gt;= 3.6.</em></p>
     <p></p>
 
-    <pre>$ python3.6 strf_cmd.py
+    <pre>$ python3.9 strf_cmd.py
 usage: strf_cmd.py [-h] [-d "directory"] [-e "directory"] [-o "file name"]
 Command line version of StructureFinder to collect cif files to a database.
 StructureFinder will search for cif/res files in the given directory(s)
@@ -97,7 +95,7 @@ optional arguments:
 
     <h4>Indexing Example</h4>
     <p>Creates the file structuredb.sqlite in the current directory:</p>
-    <pre>python3.6.exe ./strf_cmd.py -d D:\Github\StructureFinder -o test.sqlite -c -r --delete<br/>collecting files below D:\Github\StructureFinder<br/>74 files considered.<br/>Added 262 files (258 cif, 4 res) files (212 in compressed files) to database in: <br/>  0 h, 0 m, 2.05 s<br/>---------------------<br/>Total 262 cif/res files in 'test.sqlite'. Duration: 0 h, 0 m, 2.81 s</pre>
+    <pre>python3.9.exe ./strf_cmd.py -d D:\Github\StructureFinder -o test.sqlite -c -r --delete<br/>collecting files below D:\Github\StructureFinder<br/>74 files considered.<br/>Added 262 files (258 cif, 4 res) files (212 in compressed files) to database in: <br/>  0 h, 0 m, 2.05 s<br/>---------------------<br/>Total 262 cif/res files in 'test.sqlite'. Duration: 0 h, 0 m, 2.81 s</pre>
     <p></p>
     <p>The command line version always appends all data to an already existing database in the current working directory.</p>
     <p>Should I add support for pdb files? Please send me an email if you think I should.</p>
