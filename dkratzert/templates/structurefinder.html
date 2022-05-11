@@ -5,9 +5,10 @@
     <h1>StructureFinder</h1>
 
     <p>
+        The purpose of StructureFinder is to find crystallograpgic files such as <a href="https://en.wikipedia.org/wiki/Crystallographic_Information_File">
+        Crystallographic Information Files</a> (.cif) and <a href="https://shelx.uni-goettingen.de/">SHELX</a> (.res) files.
         StructureFinder indexes all .cif and/or .res files below a certain directory(s) and makes them searchable.
-        Additionally, it is able to search for unit cells in the Bruker
-        APEX2/3 software database.
+        The intention is not to bring the files in order or have a static database. It only reflects the order on the file system.
     </p>
 
     <h4>Downloads</h4>
@@ -15,7 +16,7 @@
 
     <h4>Recent Changes</h4>
     <p>
-        <a href="https://github.com/dkratzert/StructureFinder/raw/master/misc/changes.txt">Changelog</a>
+        <a href="https://github.com/dkratzert/StructureFinder/blob/master/docs/changes.txt?raw=true">Changelog</a>
     </p>
     <h4>Screenshots</h4>
     <p>
@@ -23,9 +24,10 @@
             <img src="{{ 'pictures/structurefinder/strf_1.png' }}" alt="StructureFinder main window" width="80%"/>
         </a>
     </p>
-    <p>In the main tab, you can import <a href="https://www.iucr.org/resources/cif/dictionaries" >CIF</a> and SHELX .res files
-        to a database, you can save this database.</p>
-    <p>Selecting a certain entry of the database shows the unit cell, the residuals and the asymmetric unit.</p>
+    <p>In the main tab, you can import <a href="https://www.iucr.org/resources/cif/dictionaries">CIF</a> and
+        <a href="https://shelx.uni-goettingen.de/">SHELX</a> .res files
+        to a database and you can save this database to a file for later usage.</p>
+    <p>Selecting a certain row of the database shows the unit cell, the residuals and the asymmetric unit.</p>
     <p>Basic search options for unit cells and text is also available. The cell search takes six parameters <em>a</em>,
         <em>b</em>, <em>c</em>, <em>α</em>, <em>β,</em> <em>γ</em>.
         The search is unsharp so 10 10 10 90 90 90 would find the same cell as 10.00 10.00 10.00 90.00 90.00 90.00.</p>
@@ -39,12 +41,13 @@
         <p><strong>more results option</strong><br/>volume: ±9 %, length: 0.2 Å, angle: 2.0°</p>
     </div>
     <p>The text search field searches in the directory, name and .res file text data. You can concatenate words with ? and *.
-        For example foo*bar means 'foo[any text]bar'.</p>
+       For example foo*bar means 'foo[any text]bar'.</p>
 
     <p><span>Pro tip: Double click on the unit cell to copy the cell to the clip board.</span></p>
     <p></p>
     <p></p>
-    <p>The 'all cif values' tab shows all cif values available in the database. These are not necessarily all but most values from the cif file.</p>
+    <p>The 'all cif values' tab shows all cif values available in the database. These are not necessarily all but most
+       values from the cif file.</p>
     <p>
         <a href="{{ 'pictures/structurefinder/strf_2.png' }}" target="_self" title="">
             <img src="{{ 'pictures/structurefinder/strf_2.png' }}" alt="StructureFinder CIF values tab" width="80%"/>
@@ -52,20 +55,19 @@
     </p>
 
     <p>The 'Advanced Search' tab allows you to search for several options at a time and also allows to exclude parameters.
-        I will add more options in the future. I would be happy
-        if you suggest more search options if you need more.</p>
+       I will add more options in the future and I am open for suggestions for more search options.</p>
     <p>
         <a href="{{ 'pictures/structurefinder/strf_adv.png' }}" target="_self" title="">
             <img src="{{ 'pictures/structurefinder/strf_adv.png' }}" alt="StructureFinder advanced search" width="80%"/></a></p>
     <p></p>
     <h4><br class="Apple-interchange-newline"/>Indexing cif and/or res files</h4>
-    <p>The 'Import Directory' button starts indexing of cif or res files below the selected directory recoursively, depending on which
-        file ending is enabled. It will scan
-        all subdirectories for cif/res files as well as zip files containing cif files. The time for indexing mostly depends on the
-        speed of your hard drive. Scanning a complete
-        256 GB SSD takes about 50s. An eight years old complete file server with over 100 user directories and 10.000 crystal structures
-        can take an hour.</p>
-    <p>You should not run the import over a network connection. It will take ages!</p>
+    <p>The 'Import Directory' button starts indexing of .cif or .res files below the selected directory recursively, depending on which
+       file ending is enabled. It will scan
+       all subdirectories for .cif/.res files as well as .zip files containing .cif files. The time for indexing mostly depends on the
+       speed of your hard drive. Scanning a complete
+       256 GB SSD takes about 50s. An eight years old complete file server with over 100 user directories and 20.000 crystal structures
+       can take an hour.</p>
+    <p>You should not run the import on a network drive. It will take ages!</p>
     <p></p>
     <h4>Command Line file Indexer</h4>
     <p>With the <em>strf_cmd.py</em> script, you can index directories without a graphical user interface.</p>
@@ -79,32 +81,40 @@ Command line version of StructureFinder to collect cif files to a database.
 StructureFinder will search for cif/res files in the given directory(s)
 recursively. (Either -c, -r or both options must be active!)
 optional arguments:
--h, --help      show this help message and exit
--d "directory"  Directory(s) where cif files are located.
--e "directory"  Directory names to be excluded from the file search.
-                Default is: "ROOT", ".OLEX", "TMP", "TEMP", "Papierkorb",
-                    "Recycle.Bin" Modifying -e option discards the default.
--o "file name"  Name of the output database file.
-                Default: "structuredb.sqlite"
--c              Add .cif files (crystallographic information file) to the database.
--r              Add SHELX .res files to the database.
---delete        Delete and do not append to previous database.
+  -h, --help            show this help message and exit
+  -d "directory"        Directory(s) where cif files are located.
+  -e "directory"        Directory names to be excluded from the file search. Default is: "ROOT", ".OLEX", "TMP", "TEMP", "Papierkorb", "Recycle.Bin" Modifying -e option
+                        discards the default.
+  -o "sqlite file name"
+                        Name of the output database file. Default: "./structuredb.sqlite" Also used for the commandline search (-f option).
+  -c                    Add .cif files (crystallographic information file) to the database.
+  -r                    Add SHELX .res files to the database.
+  --delete              Delete and do not append to previous database.
+  -f CELL               Search for the specified unit cell. The cell values have to be enclosed in brackets.
+
     </pre>
 
     <p></p>
 
     <h4>Indexing Example</h4>
     <p>Creates the file structuredb.sqlite in the current directory:</p>
-    <pre>python3.9.exe ./strf_cmd.py -d D:\Github\StructureFinder -o test.sqlite -c -r --delete<br/>collecting files below D:\Github\StructureFinder<br/>74 files considered.<br/>Added 262 files (258 cif, 4 res) files (212 in compressed files) to database in: <br/>  0 h, 0 m, 2.05 s<br/>---------------------<br/>Total 262 cif/res files in 'test.sqlite'. Duration: 0 h, 0 m, 2.81 s</pre>
+    <pre>./strf_cmd.bat -d D:\Github\StructureFinder -o test.sqlite -c -r --delete
+collecting *.cif, *.zip, *.tar.gz, *.tar.bz2, *.tgz, *.res files below .
+  49 files considered.
+Added 255 files (251 cif, 4 res) files (212 in compressed files) to database in:  0 h,  0 m, 2.31 s
+---------------------
+
+Total 255 cif/res files in '/Users/daniel/Documents/GitHub/StructureFinder/test.sqlite'.
+Duration:  0 h,  0 m, 2.33 s
+    </pre>
     <p></p>
-    <p>The command line version always appends all data to an already existing database in the current working directory.</p>
-    <p>Should I add support for pdb files? Please send me an email if you think I should.</p>
+    <p>The command line version always appends all data to an already
+       existing database in the current working directory. It will not append the date with the --delete option.</p>
     <p></p>
 
     <h4>Database Format</h4>
     <p>The database format is just plain sqlite (<a href="http://www.sqlite.org/" target="_self" title="">http://www.sqlite.org/</a>). You can view the
-        database structure with the fantastic sqlitebrowser (<a href="http://sqlitebrowser.org/" target="_self" title="">http://sqlitebrowser.org/</a>).</p>
-    <p>The database structure is not supposed to change, but I might add compression to the file format in the future. </p>
+        database structure with the sqlitebrowser (<a href="http://sqlitebrowser.org/" target="_self" title="">http://sqlitebrowser.org/</a>) for example.</p>
 
     <h4>CSD search</h4>
     <p>StructureFinder is able to search for unit cells in the CSD with the
@@ -115,16 +125,17 @@ optional arguments:
         </a>is installed, you can search the CSD. Double-Click on a result row to get the detailed structure page.</p>
 
     <h4>Web interface</h4>
-    <p>Instead of the regular user interface, you can run StructureFinder as web service. First, create a database with <em>strf_cmd.py.</em> This can be automated
+    <p>Instead of the regular user interface, you can run StructureFinder as web service. First, create a database with <em>./strf_cmd</em> This can be automated
         with a <a href="https://en.wikipedia.org/wiki/Cron" target="_blank" title="">cron job</a> to do it regularly. The zip file strf_cmd_version.zip above
-        contains all you need to start the web service or use the Git repository. The web interface needs the Gunicorn WSGI HTTP Server and gemmi to be installed
-        (via "pip install gunicorn gemmi").<em></em></p>
+        contains all you need to start the web service or use the Git repository.
+    <p>The required Python packages can be installed with the 'install_all_requirements' script.</p>
+    </p>
     <p><span></span>Change the variables</p>
     <pre>host = "127.0.0.1"<br/>port = "80"<br/>dbfilename = "/path/to/database.sqlite"</pre>
     <p>in cgi_ui/cgi-bin/strf_web.py to your desired webserver address and database path. Some operating systems do not allow users to run services at port 80. You might
-        use port 8080 instead.</p>
+       use port 8080 instead.</p>
     <p>Go into the Structurefinder main directory and run</p>
-    <pre>python3 cgi_ui/cgi-bin/strf_web.py</pre>
+    <pre>./strf_web</pre>
 
     <p><strong>Be aware that running a web server has security implications.</strong> Do not expose this server to the internet unless you know what you are doing!</p>
     <p>The web site should look like this after clicking on a table row:</p>
