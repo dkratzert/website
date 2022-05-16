@@ -195,6 +195,7 @@ if __name__ == "__main__":
 
     get_shelxfile_readme()
     get_finalcif_changelog()
+    get_strf_changelog()
 
     site = Site.make_site(searchpath='dkratzert/templates',
                           outpath=outpath,
