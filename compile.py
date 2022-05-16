@@ -107,7 +107,9 @@ def finalcif(template):
     ubuntu = _get_executable(base_path, 'FinalCif*ubuntu')
     suse = _get_executable(base_path, 'FinalCif*opensuse')
     mac = _get_executable(base_path, 'Finalcif*macos.app.zip')
-    files = _get_files_context(mac, suse, ubuntu, windows, ubuntu_version=20)
+    files = _get_files_context(mac, suse, ubuntu, windows,
+                               ubuntu_version=20,
+                               windows_version=10)
     context.update(
         {'version'  : _get_version_number(base_path),
          'link_base': base_path,
