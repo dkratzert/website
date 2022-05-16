@@ -126,7 +126,8 @@ def _get_files_context(mac=Path(), suse=Path(), ubuntu=Path(), windows=Path(), o
     files = []
     item = namedtuple('item', 'name, date, system')
     if _is_there(windows):
-        files.append(item(name=windows.name, date=_get_modified_date(windows), system=f'Windows {windows_version} and up'))
+        files.append(
+            item(name=windows.name, date=_get_modified_date(windows), system=f'Windows {windows_version} and up'))
     if _is_there(ubuntu):
         files.append(
             item(name=ubuntu.name, date=_get_modified_date(ubuntu), system=f'Ubuntu Linux {ubuntu_version}'))
@@ -176,6 +177,12 @@ def get_shelxfile_readme():
 def get_finalcif_changelog():
     r = requests.get('https://raw.githubusercontent.com/dkratzert/FinalCif/master/docs/changelog.txt')
     changelog_path = Path('dkratzert/templates/fcchangelog.md')
+    changelog_path.write_bytes(r.content)
+
+
+def get_strf_changelog():
+    r = requests.get('https://raw.githubusercontent.com/dkratzert/StructureFinder/master/docs/changes.txt')
+    changelog_path = Path('dkratzert/templates/strfchangelog.md')
     changelog_path.write_bytes(r.content)
 
 
