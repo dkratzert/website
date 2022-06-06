@@ -103,11 +103,12 @@ def structurefinder(template):
 def finalcif(template):
     context = {}
     base_path = Path('./files/finalcif')
-    windows = _get_executable(base_path, 'FinalCif-setup-x64*.exe')
+    windows = _get_executable(base_path, 'FinalCif-setup-x64-*.exe')
+    windows7 = _get_executable(base_path, 'FinalCif-setup-x64_win7*.exe')
     ubuntu = _get_executable(base_path, 'FinalCif*ubuntu')
     suse = _get_executable(base_path, 'FinalCif*opensuse')
     mac = _get_executable(base_path, 'Finalcif*macos.app.zip')
-    files = _get_files_context(mac, suse, ubuntu, windows,
+    files = _get_files_context(mac, suse, ubuntu, windows, windows7=windows7,
                                ubuntu_version=20,
                                windows_version=10)
     context.update(
@@ -120,7 +121,7 @@ def finalcif(template):
     return context
 
 
-def _get_files_context(mac=Path(), suse=Path(), ubuntu=Path(), windows=Path(), other1=Path(),
+def _get_files_context(mac=Path(), suse=Path(), ubuntu=Path(), windows=Path(), other1=Path(), windows7=Path(),
                        ubuntu_version=16,
                        windows_version=7):
     files = []
@@ -128,6 +129,9 @@ def _get_files_context(mac=Path(), suse=Path(), ubuntu=Path(), windows=Path(), o
     if _is_there(windows):
         files.append(
             item(name=windows.name, date=_get_modified_date(windows), system=f'Windows {windows_version} and up'))
+    if _is_there(windows7):
+        files.append(
+            item(name=windows7.name, date=_get_modified_date(windows7), system=f'Windows 7 and up'))
     if _is_there(ubuntu):
         files.append(
             item(name=ubuntu.name, date=_get_modified_date(ubuntu), system=f'Ubuntu Linux {ubuntu_version}'))
