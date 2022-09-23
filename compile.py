@@ -1,5 +1,3 @@
-import distutils.dir_util
-import distutils.log
 import os
 import shutil
 import sys
@@ -7,6 +5,7 @@ from collections import namedtuple
 from contextlib import suppress
 from datetime import datetime
 from pathlib import Path
+from typing import Union
 
 import markdown as markdown
 import requests as requests
@@ -15,8 +14,7 @@ from markdown.extensions.codehilite import CodeHiliteExtension
 from markdown.extensions.fenced_code import FencedCodeExtension
 from staticjinja import Site
 
-# noinspection PyTypeChecker
-markdowner = markdown.Markdown(output_format="html5", extensions=[FencedCodeExtension(), CodeHiliteExtension()])
+markdowner = markdown.Markdown(output_format="html", extensions=[FencedCodeExtension(), CodeHiliteExtension()])
 
 
 def base(template):
@@ -147,13 +145,13 @@ def _get_files_context(mac=Path(), suse=Path(), ubuntu=Path(), windows=Path(), o
 def copy_new_files_and_pics(outpath):
     # Copy pictures:
     print('---> Copy pictures and files to', Path(outpath).resolve())
-    _copy_with_distutils(src_dir=Path('./dkratzert/pictures'), dst_dir=Path(outpath).joinpath('pictures'))
+    _copy_with_rsync(src_dir=Path('./dkratzert/pictures'), dst_dir=Path(outpath).joinpath('pictures'))
     # Copy files verbose:
     src_dir = Path('./dkratzert/files')
     dst_dir = Path(outpath)
     print('Syncing {} with rsync into {}'.format(src_dir, dst_dir))
     print('\n-> Copy executables:')
-    os.system('rsync -rumv --delete-after {} {}'.format(src_dir, dst_dir))
+    _copy_with_rsync(src_dir, dst_dir)
     shutil.copy2('./dkratzert/pictures/favicon.png', Path(outpath))
     shutil.copy2('./dkratzert/pictures/favicon.ico', Path(outpath))
     with suppress(Exception):
@@ -161,15 +159,8 @@ def copy_new_files_and_pics(outpath):
     print('------------')
 
 
-def _copy_with_distutils(src_dir, dst_dir):
-    shutil.rmtree(dst_dir, ignore_errors=True)
-    distutils.log.set_verbosity(distutils.log.DEBUG)
-    distutils.dir_util.copy_tree(
-        str(src_dir),
-        str(dst_dir),
-        update=1,
-        verbose=1,
-    )
+def _copy_with_rsync(src_dir: Union[str, Path], dst_dir: Union[str, Path]) -> None:
+    os.system('rsync -rumv --delete-after {} {}'.format(src_dir, dst_dir))
 
 
 def get_shelxfile_readme():
