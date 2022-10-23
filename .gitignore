@@ -121,3 +121,5 @@ database.pickle
 stats.txt
 /rendered/
 dkratzert/templates/fcchangelog.md
+dkratzert/templates/fragmentdb.md
+dkratzert/templates/strfchangelog.md

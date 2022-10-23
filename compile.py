@@ -169,6 +169,12 @@ def get_shelxfile_readme():
     shelxfile_path.write_bytes(r.content)
 
 
+def get_fragmentdb_readme():
+    r = requests.get('https://raw.githubusercontent.com/dkratzert/FragmentDB/master/help/fragmentdb.md')
+    fragmentdb_path = Path('dkratzert/templates/fragmentdb.md')
+    fragmentdb_path.write_bytes(r.content)
+
+
 def get_finalcif_changelog():
     r = requests.get('https://raw.githubusercontent.com/dkratzert/FinalCif/master/docs/changelog.txt')
     changelog_path = Path('dkratzert/templates/fcchangelog.md')
@@ -188,6 +194,7 @@ if __name__ == "__main__":
     else:
         outpath = 'rendered'
 
+    get_fragmentdb_readme()
     get_shelxfile_readme()
     get_finalcif_changelog()
     get_strf_changelog()
