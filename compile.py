@@ -12,7 +12,7 @@ import requests as requests
 from jinja2 import Template
 from markdown.extensions.codehilite import CodeHiliteExtension
 from markdown.extensions.fenced_code import FencedCodeExtension
-from staticjinja import Site
+from staticjinja import Site, staticjinja
 
 markdowner = markdown.Markdown(output_format="html", extensions=[FencedCodeExtension(), CodeHiliteExtension()])
 
@@ -48,20 +48,36 @@ def _get_version_number(base_path):
 
 
 def md_to_html(template: Template):
-    markdown_content = Path(template.filename).read_text()
-    return {str(Path(template.name).stem) + '_html': markdowner.convert(markdown_content)}
+    """
+    This method makes the html file available in the jinja2 context as 'name_htl'.
+    So, there is only a tiny html file that displays the name_html context.
+
+    {% extends '_base.html' %}
+    <!-- The content of this file is directly converted from markdown -->
+    {% block content %}
+        {{ fragmentdb_html }}
+    {% endblock content %}
+    """
+    markdown_path = Path(template.filename)
+    if not markdown_path.with_suffix(".html").exists():
+        print(f'Warning, you need to add a small templates/{markdown_path.with_suffix(".html").name} '
+              f'file in order to make this to work:')
+        print(md_to_html.__doc__)
+        sys.exit()
+    markdown_content = markdown_path.read_text()
+    converted = markdowner.convert(markdown_content)
+    return {markdown_path.stem + '_html': converted}
 
 
-def render_md(site, template: Template, **kwargs):
+def render_md(site: 'Site', template: Template, **kwargs):
     # i.e. posts/post1.md -> build/posts/post1.html
-    filename = Path(template.name).with_suffix(".html")
-    out = site.outpath / filename
+    html_filename = Path(template.name).with_suffix(".html")
+    out = site.outpath / html_filename
     # Compile and stream the result
-    os.makedirs(out.parent, exist_ok=True)
-    site.get_template(filename).stream(**kwargs).dump(str(out), encoding="utf-8")
+    site.get_template(html_filename).stream(**kwargs).dump(str(out), encoding="utf-8")
 
 
-def dsr(template):
+def dsr(_: Template) -> dict:
     context = {}
     base_path = Path('./files/dsr')
     windows = _get_executable(base_path, 'DSR-setup*.exe')
@@ -212,4 +228,5 @@ if __name__ == "__main__":
                           )
     copy_new_files_and_pics(outpath)
     # enable automatic reloading
-    site.render(use_reloader=True)
+    #site.render(use_reloader=True)
+    site.render()
