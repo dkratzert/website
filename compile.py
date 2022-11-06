@@ -202,6 +202,11 @@ def get_strf_changelog():
     changelog_path = Path('dkratzert/templates/strfchangelog.md')
     changelog_path.write_bytes(r.content)
 
+def get_dsr_changelog():
+    r = requests.get('https://raw.githubusercontent.com/dkratzert/DSR/master/setup/Output/changelog.txt')
+    changelog_path = Path('dkratzert/templates/dsrchangelog.md')
+    changelog_path.write_bytes(r.content)
+
 
 if __name__ == "__main__":
     if sys.platform == 'linux':
@@ -214,6 +219,7 @@ if __name__ == "__main__":
     get_shelxfile_readme()
     get_finalcif_changelog()
     get_strf_changelog()
+    get_dsr_changelog()
 
     site = Site.make_site(searchpath='dkratzert/templates',
                           outpath=outpath,
