@@ -81,10 +81,11 @@ def dsr(_: Template) -> dict:
     context = {}
     base_path = Path('./files/dsr')
     windows = _get_executable(base_path, 'DSR-setup*.exe')
+    windows7 = _get_executable(base_path, 'DSR-setup-win7*.exe')
     ubuntu = _get_executable(base_path, 'dsr*.deb')
     suse = _get_executable(base_path, 'DSR*.rpm')
     mac = _get_executable(base_path, 'DSR*.dmg')
-    files = _get_files_context(mac, suse, ubuntu, windows)
+    files = _get_files_context(mac, suse, ubuntu, windows, windows7=windows7, windows_version=10)
     context.update(
         {'version'  : _get_version_number(base_path),
          'link_base': base_path,
