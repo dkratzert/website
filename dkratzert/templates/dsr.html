@@ -15,42 +15,61 @@
     </p>
 
     <p>The program-package consists of a simple text-database with fragments of molecules and the DSR program itself.
-        It acts as a preprocessor for SHELXL res-files. The user inserts a special command in the SHELXL .res file and the
-        DSR program reads this information to place a molecular fragment with the desired atoms on the position of the target
-        atoms or Q-peaks, respectively. Bond restraints are applied from the database to the fragment. DFIX restraints can be
+        It acts as a preprocessor for SHELXL res-files. The user inserts a special command in the SHELXL .res file and
+        the
+        DSR program reads this information to place a molecular fragment with the desired atoms on the position of the
+        target
+        atoms or Q-peaks, respectively. Bond restraints are applied from the database to the fragment. DFIX restraints
+        can be
         generated automatically, if desired. Ready to use fragments with sensual restraints can be imported from <a
                 href="http://grade.globalphasing.org" target="_blank" title="">http://grade.globalphasing.org</a>.</p>
     <p>Please report bugs or annoying problems to <a
             href="mailto:dkratzert@gmx.de?subject=DSR%20bug&amp;body=Dear%20Daniel%2C%0AI%20would%20like%20to%20report%20the%20following%20bug%20in%20DSR%20version%20....%20%3A%0A%0APlease%20find%20attached%20the%20files%20to%20reproduce%20the%20bug.%0A%0A%0A">dkratzert@gmx.de</a>.
-        I can only fix bugs that are known to me. Also wishes for new fragments or program features are very welcome!</p>
+        I can only fix bugs that are known to me. Also wishes for new fragments or program features are very welcome!
+    </p>
     <p>You may cite DSR (or FragmentDB) as</p>
-    <p><a href="http://journals.iucr.org/j/issues/2018/03/00/to5174/to5174.pdf" target="_blank" title="">D. Kratzert, I. Krossing, J. Appl.
+    <p><a href="http://journals.iucr.org/j/issues/2018/03/00/to5174/to5174.pdf" target="_blank" title="">D. Kratzert, I.
+        Krossing, J. Appl.
         Cryst. <strong>2018</strong>, <em>51</em>, 928-934. doi: 10.1107/S1600576718004508</a> (<a
             href="{{ '/files/dsr/documents/dsr_2_reprint.pdf' }}"
             target="_blank" title="">direct download</a>)</p>
     <p>
-        <a href="http://scripts.iucr.org/cgi-bin/paper?S1600576715005580" target="_blank" title="">D. Kratzert, J.J. Holstein, I. Krossing, J.
+        <a href="http://scripts.iucr.org/cgi-bin/paper?S1600576715005580" target="_blank" title="">D. Kratzert, J.J.
+            Holstein, I. Krossing, J.
             Appl. Cryst. <strong>2015</strong>, <em>48</em>, 933-938. doi:10.1107/S1600576715005580</a>
         (<a href="{{ '/files/dsr/documents/dsr_1.pdf' }}" target="_blank" title="">download</a>)
     </p>
 
     <h4>DSR GUI</h4>
-    <p>You find a graphical user interface for DSR in <a href="https://www.shelxle.org/shelx/" target="_self" title="">ShelXle</a>. Just select three source
-        and three target atoms each so you can transfer the desired fragment from DSR into your structure in <a href="https://www.shelxle.org/shelx/" target="_self"
-                                                                                                                title="">ShelXle</a>.
+    <p>You find a graphical user interface for DSR in <a href="https://www.shelxle.org/shelx/" target="_self" title="">ShelXle</a>.
+        Just select three source
+        and three target atoms each, and you can transfer the desired fragment from DSR into your structure in <a
+                href="https://www.shelxle.org/shelx/" target="_self"
+                title="">ShelXle</a>.
         The edit window makes it easy to modify/create fragments.
-        <a href="https://www.youtube.com/watch?v=hKl6Sms_4tE" target="_blank" title="">See a YouTube video how it works</a>.
+        <a href="https://www.youtube.com/watch?v=hKl6Sms_4tE" target="_blank" title="">See a YouTube video how it
+            works</a>.
         You can also use DSR on the command line.
     </p>
 
-    <h4>User Manual</h4>
-    <a href="https://github.com/dkratzert/DSR/raw/master/manuals/DSR-manual.pdf" target="_self" title="">DSR-manual.pdf</a>
+    <h4>Known bugs</h4>
+    <p>
+        SHELXL-2019/1 has a bug where the combination od RESI and SAME leads to errors like</p>
+    <p>** SAME/SADI sfac type mismatch for C1_1 C2_1 F2_1 F9_1 ** <br>
+        ** SAME/SADI sfac type mismatch for...<br>
+        [and several more lines]
+    </p>
 
-    <h3>
+    <h4>User Manual</h4>
+    <a href="https://github.com/dkratzert/DSR/raw/master/manuals/DSR-manual.pdf" target="_self"
+       title="">DSR-manual.pdf</a>
+
+    <h4>
         <strong>Downloads</strong>
-    </h3>
+    </h4>
 
     {% include 'partials/files_table.html' %}
+
 
     <p>Alternatively, you can install <a href='https://pypi.org/project/dsr-shelx/'>DSR from PyPI</a>: Install Python version >= 3.9, and run 'pip install dsr-shelx'.
         <br>(The project name dsr was already taken).
@@ -61,7 +80,8 @@
 
     <h4>Miscelanious</h4>
     <ul>
-        <li>You prefer Olex2? Then you might want to use the <a class="internal-link" href="fragmentdb.html" target="_self" title="">FragmentDB</a>
+        <li>You prefer Olex2? Then you might want to use the <a class="internal-link" href="fragmentdb.html"
+                                                                target="_self" title="">FragmentDB</a>
             plugin. It is a port of DSR to Olex2.
         </li>
         <li>You just need a parser for SHELX files? Then you might be interested in my
@@ -69,11 +89,14 @@
         </li>
     </ul>
 
-    <p>Some molecular fragments are taken from the "<a href="http://xray.chem.wisc.edu/Projects/IdealizedMolecularGeometry.html">Idealized Molecular Geometry
-        Library</a>" of Ilia A. Guzei <br/>(I. A. Guzei, <em>J. Appl. Cryst.</em> <strong>2014</strong>, 47, 806-809).</p>
+    <p>Some molecular fragments are taken from the "<a
+            href="http://xray.chem.wisc.edu/Projects/IdealizedMolecularGeometry.html">Idealized Molecular Geometry
+        Library</a>" of Ilia A. Guzei <br/>(I. A. Guzei, <em>J. Appl. Cryst.</em> <strong>2014</strong>, 47, 806-809).
+    </p>
     <p>DSR uses the following Python libraries: </p>
-    <p>Fredrik Johansson et.al. <em>mpmath: a Python library for arbitrary-precision floating-point arithmetic</em> (version 0.18), <strong>December 2013,</strong> <a
-            href="http://mpmath.org/">http://mpmath.org/</a>.</p>
+    <p>Fredrik Johansson et.al. <em>mpmath: a Python library for arbitrary-precision floating-point arithmetic</em>
+        (version 0.18), <strong>December 2013,</strong> <a
+                href="http://mpmath.org/">http://mpmath.org/</a>.</p>
     <p>A. Hagberg, D. Schult, P. Swart, <em>NetworkX: package for the creation, manipulation, and study of complex
         networks </em>(version 1.8.1) 2013, <a href="http://networkx.github.io/">http://networkx.github.io/</a>.
     </p>
@@ -82,7 +105,8 @@
     <p>You can find the source code of <a href="https://github.com/dkratzert/DSR">DSR at Github</a>.</p>
 
     <h4>License</h4>
-    <p>DSR is free software and licensed under the <a href="https://en.wikipedia.org/wiki/Beerware" target="_self" title="">beerware license</a>.</p>
+    <p>DSR is free software and licensed under the <a href="https://en.wikipedia.org/wiki/Beerware" target="_self"
+                                                      title="">beerware license</a>.</p>
 
 
 
