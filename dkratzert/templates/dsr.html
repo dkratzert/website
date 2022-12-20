@@ -54,11 +54,13 @@
 
     <h4>Known bugs</h4>
     <p>
-        SHELXL-2019/1 has a bug where the combination od RESI and SAME leads to errors like</p>
+        SHELXL-2019/1 has a bug where the combination of RESI and SAME leads to errors like</p>
     <p>** SAME/SADI sfac type mismatch for C1_1 C2_1 F2_1 F9_1 ** <br>
         ** SAME/SADI sfac type mismatch for...<br>
         [and several more lines]
     </p>
+    <p>The problem is solved in SHELXL-2019/2, which you can get on the <a href="http://shelx.uni-goettingen.de/">SHELX
+        website</a>.</p>
 
     <h4>User Manual</h4>
     <a href="https://github.com/dkratzert/DSR/raw/master/manuals/DSR-manual.pdf" target="_self"
@@ -71,7 +73,8 @@
     {% include 'partials/files_table.html' %}
 
 
-    <p>Alternatively, you can install <a href='https://pypi.org/project/dsr-shelx/'>DSR from PyPI</a>: Install Python version >= 3.9, and run 'pip install dsr-shelx'.
+    <p>Alternatively, you can install <a href='https://pypi.org/project/dsr-shelx/'>DSR from PyPI</a>:
+        Install Python version >= 3.9, and run 'pip install dsr-shelx'.
         <br>(The project name dsr was already taken).
         The PyPI package has no external dependencies, so it can run on any system that supports Python3.</p>
 
