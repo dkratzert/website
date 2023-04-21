@@ -169,8 +169,11 @@ def copy_new_files_and_pics(outpath):
     print('Syncing {} with rsync into {}'.format(src_dir, dst_dir))
     print('\n-> Copy executables:')
     _copy_with_rsync(src_dir, dst_dir)
-    shutil.copy2('./dkratzert/pictures/favicon.png', Path(outpath))
-    shutil.copy2('./dkratzert/pictures/favicon.ico', Path(outpath))
+    try:
+        shutil.copy2('./dkratzert/pictures/favicon.png', Path(outpath))
+        shutil.copy2('./dkratzert/pictures/favicon.ico', Path(outpath))
+    except FileNotFoundError:
+        print('\nWarning!! Favicons not found! -------------------------------\n')
     with suppress(Exception):
         shutil.copy2(list(Path('../').glob('google*.html'))[0], Path(outpath))
     print('------------')

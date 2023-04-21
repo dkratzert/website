@@ -13,6 +13,11 @@ pre {
     padding-bottom: 1em;
 }
 
+#patreon-link {
+    color: #880000;
+    font-weight: bolder;
+}
+
 .footer {
     font-size: small;
  }
