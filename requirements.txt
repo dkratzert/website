@@ -12,3 +12,4 @@ staticjinja
 urllib3
 wheel
 pip
+sphinx
