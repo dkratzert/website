@@ -53,20 +53,32 @@
     </p>
 
     <h4>Known bugs</h4>
-    <p>
-        SHELXL-2019/1 has a bug where the combination of RESI and SAME leads to errors like</p>
-    <p>** SAME/SADI sfac type mismatch for C1_1 C2_1 F2_1 F9_1 ** <br>
-        ** SAME/SADI sfac type mismatch for...<br>
-        [and several more lines]
-    </p>
-    <p>The problem is solved in SHELXL-2019/2, which you can get on the <a href="http://shelx.uni-goettingen.de/">SHELX
-        website</a>.</p>
-    <p>Unfortunately, the Bruker executables still have SHELXL version 2019/1 included.</p>
+    <ul>
+        <li>
+            <p>
+                SHELXL-2019/1 has a bug where the combination of RESI and SAME leads to errors like</p>
+            <p>** SAME/SADI sfac type mismatch for C1_1 C2_1 F2_1 F9_1 ** <br>
+                ** SAME/SADI sfac type mismatch for...<br>
+                [and several more lines]
+            </p>
+            <p>The problem is solved in SHELXL-2019/2, which you can get on the <a
+                    href="http://shelx.uni-goettingen.de/">SHELX
+                website</a>.</p>
+            <p>Unfortunately, the Bruker executables still have SHELXL version 2019/1 included.</p>
+        </li>
+        <li>
+            <p>For Linux and Mac users: The update from DSR for python 2.7 (version 236 and below) to DSR
+                for Python 3 needs some manual work. You should uninstall the old version and make sure the files
+                <i>dsr.sh</i>, <i>dsr-mac</i> and <i>dsr-linux</i> are removed from <i>/etc/profile.d/</i>.</p>
+            <p>The command 'dsr -u' for updates doesn't work anymore!</p>
+        </li>
+    </ul>
 
     <h4>User Manual</h4>
-    <a href="https://github.com/dkratzert/DSR/raw/master/manuals/DSR-manual.pdf" target="_self"
-       title="">DSR-manual.pdf</a>
-
+    <p>
+        <a href="https://github.com/dkratzert/DSR/raw/master/manuals/DSR-manual.pdf" target="_self"
+           title="">DSR-manual.pdf</a>
+    </p>
     <h4>
         <strong>Downloads</strong>
     </h4>
