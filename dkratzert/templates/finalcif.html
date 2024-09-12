@@ -47,6 +47,13 @@
             <img src="{{ 'pictures/finalcif/finalcif_main.png' }}" alt="FinalCif program main window" width="95%"/>
         </a>
     </p>
+
+    <h4>Known bugs</h4>
+    <p>{% raw %}
+        There was an incompatible change in the format of the symmetry generators in .docx templates for 'ba_symminfo',
+        'torsion_symminfo' and 'hydrogen_symminfo'. In order to make older templates to work again, you have to change all
+        {{ba_symminfo}} to {{r ba_symminfo}} etc.
+    </p>{% endraw %}
     <br>
     <h4>Downloads</h4>
 
