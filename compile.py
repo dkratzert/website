@@ -226,6 +226,8 @@ if __name__ == "__main__":
 
     site = Site.make_site(searchpath='dkratzert/templates',
                           outpath=outpath,
+                          staticpaths=["static/bootstrap-5.3.1/",
+                                       "static/custom"],
                           contexts=[(r'.*\.html', base),
                                     ('structurefinder.html', structurefinder),
                                     ('dsr.html', dsr),
