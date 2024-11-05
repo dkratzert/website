@@ -56,21 +56,23 @@
     <ul>
         <li>
             <p>
-                SHELXL-2019/1 has a bug where the combination of RESI and SAME leads to errors like</p>
+                SHELXL-2019/1 has a bug where the combination of RESI and SAME leads to errors like
+            </p>
             <p>** SAME/SADI sfac type mismatch for C1_1 C2_1 F2_1 F9_1 ** <br>
                 ** SAME/SADI sfac type mismatch for...<br>
                 [and several more lines]
             </p>
             <p>The problem is solved in SHELXL-2019/2, which you can get on the <a
                     href="http://shelx.uni-goettingen.de/">SHELX
-                website</a>.</p>
-            <p>Unfortunately, the Bruker executables still have SHELXL version 2019/1 included.</p>
+                website</a>.
+            </p>
         </li>
         <li>
             <p>For Linux and Mac users: The update from DSR for python 2.7 (version 236 and below) to DSR
                 for Python 3 needs some manual work. You should uninstall the old version and make sure the files
                 <i>dsr.sh</i>, <i>dsr.pth</i>, <i>dsr-mac</i> and <i>dsr-linux</i> are removed from <i>/etc/profile.d/</i>
-                and/or <i>/etc/paths.d/</i>.</p>
+                and/or <i>/etc/paths.d/</i>.
+            </p>
             <p>The command 'dsr -u' for updates doesn't work anymore!</p>
         </li>
     </ul>
@@ -90,7 +92,8 @@
     <p>Alternatively, you can install <a href='https://pypi.org/project/dsr-shelx/'>DSR from PyPI</a>:
         Install Python version >= 3.9, and run 'pip install dsr-shelx'.
         <br>(The project name dsr was already taken).
-        The PyPI package has no external dependencies, so it can run on any system that supports Python3.</p>
+        The PyPI package has no external dependencies, so it can run on any system that supports Python3.
+    </p>
 
     <h4>Recent Changes</h4>
     <a href="dsrchangelog.html" title="">changelog</a>
@@ -110,10 +113,12 @@
             href="http://xray.chem.wisc.edu/Projects/IdealizedMolecularGeometry.html">Idealized Molecular Geometry
         Library</a>" of Ilia A. Guzei <br/>(I. A. Guzei, <em>J. Appl. Cryst.</em> <strong>2014</strong>, 47, 806-809).
     </p>
-    <p>DSR uses the following Python libraries: </p>
+    <p>DSR uses the following Python libraries:
+    </p>
     <p>Fredrik Johansson et.al. <em>mpmath: a Python library for arbitrary-precision floating-point arithmetic</em>
         (version 0.18), <strong>December 2013,</strong> <a
-                href="http://mpmath.org/">http://mpmath.org/</a>.</p>
+                href="http://mpmath.org/">http://mpmath.org/</a>.
+    </p>
     <p>A. Hagberg, D. Schult, P. Swart, <em>NetworkX: package for the creation, manipulation, and study of complex
         networks </em>(version 1.8.1) 2013, <a href="http://networkx.github.io/">http://networkx.github.io/</a>.
     </p>
