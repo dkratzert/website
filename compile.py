@@ -85,6 +85,10 @@ def dsr(_: Template) -> dict:
     suse = _get_executable(base_path, 'DSR*.rpm')
     mac = _get_executable(base_path, 'DSR*.dmg')
     files = _get_files_context(mac, suse, ubuntu, windows, windows_version=10)
+    item = namedtuple('item', 'name, date, system')
+    files.append(item(name='<a href=files/dsr/docs/index.html#installation>manual installation</a>',
+                      date='',
+                      system="Other non-Windows systems"))
     context.update(
         {'version'  : _get_version_number(base_path),
          'link_base': base_path,
@@ -125,6 +129,10 @@ def finalcif(template):
     files = _get_files_context(mac, suse, ubuntu, windows, windows7=windows7,
                                ubuntu_version=20,
                                windows_version=10)
+    item = namedtuple('item', 'name, date, system')
+    files.append(item(name='<a href=files/finalcif/docs/index.html#any-system>manual installation</a>',
+                      date='',
+                      system="Other non-Windows systems"))
     context.update(
         {'version'  : _get_version_number(base_path),
          'link_base': base_path,
