@@ -6,6 +6,7 @@ Allow: /finalcif.html
 Allow: /fragmentdb.html
 Allow: /shelxfile.html
 Allow: /files/finalcif/docs/
+Disallow: /files
 Disallow: *.exe
 Disallow: *.tar.gz
 Disallow: *.gz
@@ -20,3 +21,21 @@ Crawl-Delay: 430001
 
 User-agent: ZoominfoBot
 Crawl-Delay: 440003
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
