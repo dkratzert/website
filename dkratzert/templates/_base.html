@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="static/bootstrap-5.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ 'static/custom/mycss.css' }}">
     <link rel="stylesheet" href="{{ 'static/custom/code-styles.css' }}">
+    <script>const now = Date.now()</script>
+    <script>Robohash.render(now, document.getElementById('robo'))</script>
     <title>
         {{ title }}
     </title>
@@ -33,6 +35,9 @@
             <div class="footer pt-5 pb-3 mt-5">
                 This page was rendered with <a target="_blank" href="https://staticjinja.readthedocs.io">staticjinja</a>
                 and <a href="https://getbootstrap.com" target="_blank">Bootstrap</a>.
+            </div>
+            <div id="robo">
+
             </div>
         </div>
 
