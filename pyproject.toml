@@ -1,0 +1,11 @@
+[project]
+name = "website"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.13"
+dependencies = [
+    "jinja2>=3.1.6",
+    "markdown>=3.10.2",
+    "requests>=2.32.5",
+    "staticjinja>=5.0.0",
+]
