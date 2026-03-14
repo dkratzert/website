@@ -7,5 +7,7 @@ dependencies = [
     "jinja2>=3.1.6",
     "markdown>=3.10.2",
     "requests>=2.32.5",
+    "ruff>=0.15.6",
     "staticjinja>=5.0.0",
+    "ty>=0.0.23",
 ]
