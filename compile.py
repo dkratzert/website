@@ -190,39 +190,55 @@ def _copy_with_rsync(src_dir: Union[str, Path], dst_dir: Union[str, Path]) -> No
     os.system('rsync -rumv --delete-after {} {}'.format(src_dir, dst_dir))
 
 
+def _fetch_and_write(url: str, dest: Path) -> None:
+    try:
+        r = requests.get(url, timeout=10)
+        r.raise_for_status()
+        dest.write_bytes(r.content)
+    except requests.RequestException as e:
+        print(f'Warning: Could not fetch {url}: {e}')
+
+
 def get_shelxfile_readme():
-    r = requests.get('https://raw.githubusercontent.com/dkratzert/ShelXFile/master/README.md')
-    shelxfile_path = Path('dkratzert/templates/shelxfile.md')
-    shelxfile_path.write_bytes(r.content)
+    _fetch_and_write(
+        'https://raw.githubusercontent.com/dkratzert/ShelXFile/master/README.md',
+        Path('dkratzert/templates/shelxfile.md'),
+    )
 
 
 def get_fastmolwidget_readme():
-    r = requests.get('https://raw.githubusercontent.com/dkratzert/Fastmolwidget/main/README.md')
-    fastmolwidget_path = Path('dkratzert/templates/fastmolwidget.md')
-    fastmolwidget_path.write_bytes(r.content)
+    _fetch_and_write(
+        'https://raw.githubusercontent.com/dkratzert/Fastmolwidget/main/README.md',
+        Path('dkratzert/templates/fastmolwidget.md'),
+    )
 
 
 def get_fragmentdb_readme():
-    r = requests.get('https://raw.githubusercontent.com/dkratzert/FragmentDB/master/help/fragmentdb.md')
-    fragmentdb_path = Path('dkratzert/templates/fragmentdb.md')
-    fragmentdb_path.write_bytes(r.content)
+    _fetch_and_write(
+        'https://raw.githubusercontent.com/dkratzert/FragmentDB/master/help/fragmentdb.md',
+        Path('dkratzert/templates/fragmentdb.md'),
+    )
 
 
 def get_finalcif_changelog():
-    r = requests.get('https://raw.githubusercontent.com/dkratzert/FinalCif/master/docs/changelog.txt')
-    changelog_path = Path('dkratzert/templates/fcchangelog.md')
-    changelog_path.write_bytes(r.content)
+    _fetch_and_write(
+        'https://raw.githubusercontent.com/dkratzert/FinalCif/master/docs/changelog.txt',
+        Path('dkratzert/templates/fcchangelog.md'),
+    )
 
 
 def get_strf_changelog():
-    r = requests.get('https://raw.githubusercontent.com/dkratzert/StructureFinder/master/docs/changes.txt')
-    changelog_path = Path('dkratzert/templates/strfchangelog.md')
-    changelog_path.write_bytes(r.content)
+    _fetch_and_write(
+        'https://raw.githubusercontent.com/dkratzert/StructureFinder/master/docs/changes.txt',
+        Path('dkratzert/templates/strfchangelog.md'),
+    )
+
 
 def get_dsr_changelog():
-    r = requests.get('https://raw.githubusercontent.com/dkratzert/DSR/master/setup/Output/changelog.txt')
-    changelog_path = Path('dkratzert/templates/dsrchangelog.md')
-    changelog_path.write_bytes(r.content)
+    _fetch_and_write(
+        'https://raw.githubusercontent.com/dkratzert/DSR/master/setup/Output/changelog.txt',
+        Path('dkratzert/templates/dsrchangelog.md'),
+    )
 
 
 if __name__ == "__main__":
