@@ -196,6 +196,12 @@ def get_shelxfile_readme():
     shelxfile_path.write_bytes(r.content)
 
 
+def get_fastmolwidget_readme():
+    r = requests.get('https://raw.githubusercontent.com/dkratzert/Fastmolwidget/main/README.md')
+    fastmolwidget_path = Path('dkratzert/templates/fastmolwidget.md')
+    fastmolwidget_path.write_bytes(r.content)
+
+
 def get_fragmentdb_readme():
     r = requests.get('https://raw.githubusercontent.com/dkratzert/FragmentDB/master/help/fragmentdb.md')
     fragmentdb_path = Path('dkratzert/templates/fragmentdb.md')
@@ -228,6 +234,7 @@ if __name__ == "__main__":
 
     get_fragmentdb_readme()
     get_shelxfile_readme()
+    get_fastmolwidget_readme()
     get_finalcif_changelog()
     get_strf_changelog()
     get_dsr_changelog()
