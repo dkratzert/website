@@ -12,9 +12,10 @@ import requests as requests
 from jinja2 import Template
 from markdown.extensions.codehilite import CodeHiliteExtension
 from markdown.extensions.fenced_code import FencedCodeExtension
+from markdown.extensions.tables import TableExtension
 from staticjinja import Site, staticjinja
 
-markdowner = markdown.Markdown(output_format="html", extensions=[FencedCodeExtension(), CodeHiliteExtension()])
+markdowner = markdown.Markdown(output_format="html", extensions=[FencedCodeExtension(), CodeHiliteExtension(), TableExtension()])
 
 
 def base(template):
