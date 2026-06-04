@@ -5,24 +5,12 @@
     <h1>StructureFinder</h1>
 
     <p>
-        The purpose of StructureFinder is to find crystallograpgic files such as <a href="https://en.wikipedia.org/wiki/Crystallographic_Information_File">
+        The purpose of StructureFinder is to find crystallographic files such as <a href="https://en.wikipedia.org/wiki/Crystallographic_Information_File">
         Crystallographic Information Files</a> (.cif) and <a href="https://shelx.uni-goettingen.de/">SHELX</a> (.res) files.
-        StructureFinder indexes all .cif and/or .res files below a certain directory(s) and makes them searchable.
-        The intention is not to bring the files in order or have a static database. It only reflects the order on the file system.
+        StructureFinder indexes all .cif and/or .res files below a certain directory or directories and makes them searchable.
+        The intention is not to bring the files in order or maintain a static database — it only reflects the order on the file system.
     </p>
 
-    <h4>Downloads</h4>
-    {% include 'partials/_files_table.html' %}
-
-    <p>There is also a <a href="https://pypi.org/project/structurefinder/">pypi package</a>. See documentation for details.</p>
-    <h4>
-        <a href="{{ 'files/structurefinder/docs' }}" target="_blank" title="">Documentation</a>
-    </h4>
-
-    <h4>Recent Changes</h4>
-    <p>
-        <a href="https://dkratzert.de/strfchangelog.html">See last changes in StructureFinder</a>
-    </p>
     <h4>Screenshots</h4>
     <p>
         <a href="{{ 'pictures/structurefinder/strf_1.png' }}" target="_self" title="">
@@ -30,8 +18,30 @@
         </a>
     </p>
 
+    <h4>Downloads</h4>
+    {% include 'partials/_files_table.html' %}
+    <p>There is also a <a href="https://pypi.org/project/structurefinder/">PyPI package</a> available.
+        See the documentation for installation details.</p>
+
+    <h4>
+        <a href="{{ 'files/structurefinder/docs' }}" target="_blank" title="">Documentation</a>
+    </h4>
+
+    <h4>Running from Source Code</h4>
+    <p>If the provided StructureFinder executables are not suitable for your system, you can run it from source code.
+        Please refer to the <a href="{{ 'files/structurefinder/docs' }}" target="_blank" title="">documentation</a> for details.</p>
+
+    <h4>Recent Changes</h4>
+    <p>
+        <a href="https://dkratzert.de/strfchangelog.html">See last changes in StructureFinder</a>
+    </p>
+
+    <p>As always, please report bugs! <a class="email-link" href="mailto:dkratzert@gmx.de"
+                                         target="_self"
+                                         title="">dkratzert@gmx.de</a></p>
+
     <h4>Source Code</h4>
-    <p>You can find the source code of <a href="https://github.com/dkratzert/StructureFinder">StructureFinder at Github</a>.
+    <p>You can find the source code of <a href="https://github.com/dkratzert/StructureFinder">StructureFinder at GitHub</a>.
        Contributions are welcome!
     </p>
 
