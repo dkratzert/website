@@ -170,7 +170,7 @@ def _get_files_context(mac=Path(), suse=Path(), ubuntu=Path(), windows=Path(), o
 def copy_new_files_and_pics(outpath):
     # Copy pictures:
     print('---> Copy pictures and files to', Path(outpath).resolve())
-    _copy_with_rsync(src_dir=Path('./dkratzert/pictures'), dst_dir=Path(outpath).joinpath('pictures'))
+    _copy_with_rsync(src_dir=Path('./dkratzert/pictures'), dst_dir=Path(outpath))
     # Copy files verbose:
     src_dir = Path('./dkratzert/files')
     dst_dir = Path(outpath)
