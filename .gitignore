@@ -124,4 +124,6 @@ dkratzert/templates/fcchangelog.md
 dkratzert/templates/fragmentdb.md
 dkratzert/templates/strfchangelog.md
 dkratzert/templates/dsrchangelog.md
-/dkratzert/templates/fastmolwidget.md
+dkratzert/templates/fastmolwidget.md
+dkratzert/templates/fastmolwidget_js.md
+/dkratzert/templates/fastmolwidgetjs.md

@@ -212,6 +212,10 @@ def get_fastmolwidget_readme():
         'https://raw.githubusercontent.com/dkratzert/Fastmolwidget/main/README.md',
         Path('dkratzert/templates/fastmolwidget.md'),
     )
+    _fetch_and_write(
+        'https://raw.githubusercontent.com/dkratzert/Fastmolwidget/main/src/fastmolwidget/web/js/README.md',
+        Path('dkratzert/templates/fastmolwidgetjs.md'),
+    )
 
 
 def get_fragmentdb_readme():
