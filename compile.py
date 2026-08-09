@@ -5,7 +5,7 @@ from collections import namedtuple
 from contextlib import suppress
 from datetime import datetime
 from pathlib import Path
-from typing import Union
+from typing import Union, Any
 
 import markdown as markdown
 import requests as requests
@@ -15,7 +15,8 @@ from markdown.extensions.fenced_code import FencedCodeExtension
 from markdown.extensions.tables import TableExtension
 from staticjinja import Site, staticjinja
 
-markdowner = markdown.Markdown(output_format="html", extensions=[FencedCodeExtension(), CodeHiliteExtension(), TableExtension()])
+markdowner = markdown.Markdown(output_format="html",
+                               extensions=[FencedCodeExtension(), CodeHiliteExtension(), TableExtension()])
 
 
 def base(template):
@@ -65,9 +66,29 @@ def md_to_html(template: Template):
               f'file in order to make this to work:')
         print(md_to_html.__doc__)
         sys.exit()
+
     markdown_content = markdown_path.read_text()
     converted = markdowner.convert(markdown_content)
-    return {markdown_path.stem + '_html': converted}
+
+    # Standard-Kontext für alle .md Dateien
+    context = {markdown_path.stem + '_html': converted}
+
+    context = handle_second_md_file(context, markdown_path)
+
+    return context
+
+
+def handle_second_md_file(context: dict[str, str], markdown_path: Any):
+    # Sonderfall: Wenn es die fastmolwidget.md ist, holen wir das JS-Readme dazu
+    if markdown_path.stem == 'fastmolwidget':
+        js_path = markdown_path.with_name('fastmolwidgetjs.md')
+        if js_path.exists():
+            markdowner.reset()  # Wichtig, damit der Parser nicht stolpert
+            js_converted = markdowner.convert(js_path.read_text())
+            context['fastmolwidgetjs_html'] = js_converted
+        else:
+            context['fastmolwidgetjs_html'] = ""
+    return context
 
 
 def render_md(site: 'Site', template: Template, **kwargs):
@@ -275,5 +296,5 @@ if __name__ == "__main__":
                           )
     copy_new_files_and_pics(outpath)
     # enable automatic reloading
-    #site.render(use_reloader=True)
+    # site.render(use_reloader=True)
     site.render()
