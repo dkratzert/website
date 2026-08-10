@@ -61,6 +61,8 @@ def md_to_html(template: Template):
     {% endblock content %}
     """
     markdown_path = Path(template.filename)
+    if 'fastmolwidgetjs' in str(markdown_path):
+        markdown_path.with_suffix(".html").touch()
     if not markdown_path.with_suffix(".html").exists():
         print(f'Warning, you need to add a small templates/{markdown_path.with_suffix(".html").name} '
               f'file in order to make this to work:')
@@ -72,9 +74,7 @@ def md_to_html(template: Template):
 
     # Standard-Kontext für alle .md Dateien
     context = {markdown_path.stem + '_html': converted}
-
     context = handle_second_md_file(context, markdown_path)
-
     return context
 
 
