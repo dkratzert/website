@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Free programs for small-molecule crystallography, modelling of disorder with SHELXL and
@@ -9,7 +9,7 @@
     <meta name="author" content="Daniel Kratzert">
     <meta name="viewport" content="width=device-width, initial-scale=0.9, shrink-to-fit=no">
     <link rel="apple-touch-icon" href="{{ 'pictures/apple-touch-icon.png' }}">
-    <link rel="stylesheet" href="static/bootstrap-5.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/bootstrap-6.0.0-alpha.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ 'static/custom/mycss.css' }}">
     <link rel="stylesheet" href="{{ 'static/custom/code-styles.css' }}">
     <title>
@@ -23,11 +23,8 @@
 {% include 'partials/_navigation.html' %}
 
 <div class="container">
-    <div class="row">
-        <div class="col-lg-2 col-md-1 col-sm-0">
-        </div>
-
-        <div class="col-lg-8 col-md-10 col-sm-12">
+    <div class="row justify-content-center">
+        <div class="col-12 md:col-10 lg:col-8">
             {% block content %}
             {% endblock %}
             <div class="footer pt-5 pb-3 mt-5">
@@ -36,7 +33,7 @@
             </div>
         </div>
 
-        {#<div class="col-lg-2 col-md-1 col-sm-0">
+        {#<div class="col-12 md:col-1 lg:col-2">
             <div class="position-fixed footer pt-5 pb-3 mt-5" id="patreon-link">
                 Do you like the software?<br>
                 <iframe src="https://github.com/sponsors/dkratzert/button" title="Sponsor on GitHub" height="32"

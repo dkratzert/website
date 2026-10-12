@@ -44,7 +44,7 @@ def _is_there(file):
 def _get_version_number(base_path):
     version_txt = _get_executable(base_path, 'version.txt')
     if version_txt.exists() and version_txt.is_file():
-        return version_txt.read_text()
+        return version_txt.read_text(encoding='utf-8')
     else:
         return '0'
 
@@ -69,7 +69,7 @@ def md_to_html(template: Template):
         print(md_to_html.__doc__)
         sys.exit()
 
-    markdown_content = markdown_path.read_text()
+    markdown_content = markdown_path.read_text(encoding='utf-8')
     converted = markdowner.convert(markdown_content)
 
     # Standard-Kontext für alle .md Dateien
@@ -84,7 +84,7 @@ def handle_second_md_file(context: dict[str, str], markdown_path: Any):
         js_path = markdown_path.with_name('fastmolwidgetjs.md')
         if js_path.exists():
             markdowner.reset()  # Wichtig, damit der Parser nicht stolpert
-            js_converted = markdowner.convert(js_path.read_text())
+            js_converted = markdowner.convert(js_path.read_text(encoding='utf-8'))
             context['fastmolwidgetjs_html'] = js_converted
         else:
             context['fastmolwidgetjs_html'] = ""
@@ -283,7 +283,7 @@ if __name__ == "__main__":
 
     site = Site.make_site(searchpath='dkratzert/templates',
                           outpath=outpath,
-                          staticpaths=["static/bootstrap-5.3.1/",
+                          staticpaths=["static/bootstrap-6.0.0-alpha.1/",
                                        "static/custom"],
                           contexts=[(r'.*\.html', base),
                                     ('structurefinder.html', structurefinder),
