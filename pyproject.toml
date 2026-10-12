@@ -1,10 +1,19 @@
 [project]
 name = "website"
 version = "0.1.0"
+description = "Static website of Daniel Kratzert's SC-XRD tools, rendered with staticjinja and Bootstrap"
+readme = "README.md"
+license = "GPL-3.0-only"
+license-files = ["LICENSE"]
+authors = [{ name = "Daniel Kratzert" }]
 requires-python = ">=3.14"
 dependencies = [
-    'markdown',
-    'sphinx',
-    'staticjinja',
-    'docopt-ng'
+    "jinja2>=3.1",
+    "markdown>=3.7",
+    "pygments>=2.18",
+    "requests>=2.32",
+    "staticjinja>=5.0",
 ]
+
+[tool.uv]
+package = false
