@@ -283,8 +283,6 @@ if __name__ == "__main__":
 
     site = Site.make_site(searchpath='dkratzert/templates',
                           outpath=outpath,
-                          staticpaths=["static/bootstrap-6.0.0-alpha.1/",
-                                       "static/custom"],
                           contexts=[(r'.*\.html', base),
                                     ('structurefinder.html', structurefinder),
                                     ('dsr.html', dsr),
@@ -294,6 +292,7 @@ if __name__ == "__main__":
                           rules=[(r".*\.md", render_md)],
                           mergecontexts=True,
                           )
+    shutil.copytree('dkratzert/static', Path(outpath) / 'static', dirs_exist_ok=True)
     copy_new_files_and_pics(outpath)
     # enable automatic reloading
     # site.render(use_reloader=True)
