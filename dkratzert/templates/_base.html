@@ -30,10 +30,6 @@
         <div class="col-lg-8 col-md-10 col-sm-12">
             {% block content %}
             {% endblock %}
-            <div class="footer pt-5 pb-3 mt-5">
-                This page was rendered with <a target="_blank" href="https://staticjinja.readthedocs.io">staticjinja</a>
-                and <a href="https://getbootstrap.com" target="_blank">Bootstrap</a>.
-            </div>
         </div>
 
         {#<div class="col-lg-2 col-md-1 col-sm-0">
@@ -46,6 +42,28 @@
     </div>
 
 </div>
+
+<footer class="site-footer bg-light border-top mt-5 pt-4 pb-3">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-9">
+                <a class="d-flex align-items-center text-decoration-none text-dark fw-semibold mb-2"
+                   href="{{ 'index.html' }}">
+                    <img src="{{ 'pictures/favicon.png' }}" alt="" width="24" class="me-2"> Daniel Kratzert
+                </a>
+                <p class="text-muted small mb-0">
+                    Free software for small-molecule crystallography: modelling disorder, finalising CIFs,
+                    and managing structures.
+                </p>
+            </div>
+        </div>
+        <hr class="my-3">
+        <div class="d-flex flex-wrap justify-content-between gap-2 small text-muted">
+            <span>&copy; {{ template_date[:4] }} Dr. Daniel Kratzert</span>
+            <span>Page updated {{ template_date }}</span>
+        </div>
+    </div>
+</footer>
 
 <!-- kratzert -->
 </body>
