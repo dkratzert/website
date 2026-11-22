@@ -20,16 +20,18 @@ markdowner = markdown.Markdown(output_format="html",
 
 
 def base(template):
-    template_mtime = os.path.getmtime(template.filename)
-    date = datetime.fromtimestamp(template_mtime)
     return {
-        'template_date': date.strftime('%Y-%m-%d'),
+        'template_date': _get_today(),
         'title'        : 'Daniel Kratzerts SC-XRD tools',
     }
 
 
 def _get_modified_date(os_path: Path) -> str:
     return datetime.fromtimestamp(os_path.stat().st_mtime).strftime('%Y-%m-%d')
+
+
+def _get_today() -> str:
+    return datetime.now().strftime('%Y-%m-%d')
 
 
 def _get_executable(base_path: Path, pattern: str) -> Path:
@@ -73,7 +75,8 @@ def md_to_html(template: Template):
     converted = markdowner.convert(markdown_content)
 
     # Standard-Kontext für alle .md Dateien
-    context = {markdown_path.stem + '_html': converted}
+    context = {markdown_path.stem + '_html': converted,
+               'template_date': _get_today()}
     context = handle_second_md_file(context, markdown_path)
     return context
 

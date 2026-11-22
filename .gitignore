@@ -7,7 +7,6 @@ __pycache__/
 *.so
 dkratzert/rendered/
 dkratzert/files/
-dkratzert/pictures/
 # Distribution / packaging
 .Python
 build/
