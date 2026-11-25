@@ -46,7 +46,7 @@ def _is_there(file):
 def _get_version_number(base_path):
     version_txt = _get_executable(base_path, 'version.txt')
     if version_txt.exists() and version_txt.is_file():
-        return version_txt.read_text()
+        return version_txt.read_text(encoding='utf-8')
     else:
         return '0'
 
@@ -71,7 +71,7 @@ def md_to_html(template: Template):
         print(md_to_html.__doc__)
         sys.exit()
 
-    markdown_content = markdown_path.read_text()
+    markdown_content = markdown_path.read_text(encoding='utf-8')
     converted = markdowner.convert(markdown_content)
 
     # Standard-Kontext für alle .md Dateien
@@ -87,7 +87,7 @@ def handle_second_md_file(context: dict[str, str], markdown_path: Any):
         js_path = markdown_path.with_name('fastmolwidgetjs.md')
         if js_path.exists():
             markdowner.reset()  # Wichtig, damit der Parser nicht stolpert
-            js_converted = markdowner.convert(js_path.read_text())
+            js_converted = markdowner.convert(js_path.read_text(encoding='utf-8'))
             context['fastmolwidgetjs_html'] = js_converted
         else:
             context['fastmolwidgetjs_html'] = ""
@@ -194,13 +194,13 @@ def _get_files_context(mac=Path(), suse=Path(), ubuntu=Path(), windows=Path(), o
 def copy_new_files_and_pics(outpath):
     # Copy pictures:
     print('---> Copy pictures and files to', Path(outpath).resolve())
-    _copy_with_rsync(src_dir=Path('./dkratzert/pictures'), dst_dir=Path(outpath))
+    _sync_dir(src_dir=Path('./dkratzert/pictures'), dst_dir=Path(outpath))
     # Copy files verbose:
     src_dir = Path('./dkratzert/files')
     dst_dir = Path(outpath)
-    print('Syncing {} with rsync into {}'.format(src_dir, dst_dir))
+    print('Syncing {} into {}'.format(src_dir, dst_dir))
     print('\n-> Copy executables:')
-    _copy_with_rsync(src_dir, dst_dir)
+    _sync_dir(src_dir, dst_dir)
     try:
         shutil.copy2('./dkratzert/pictures/favicon.png', Path(outpath))
         shutil.copy2('./dkratzert/pictures/favicon.ico', Path(outpath))
@@ -211,9 +211,25 @@ def copy_new_files_and_pics(outpath):
     print('------------')
 
 
-def _copy_with_rsync(src_dir: Union[str, Path], dst_dir: Union[str, Path]) -> None:
-    os.system('rsync -rumv --delete-after {} {}'.format(src_dir, dst_dir))
+def _sync_dir(src_dir: Union[str, Path], dst_dir: Union[str, Path]) -> None:
+    """Replacement for 'rsync -rumv --delete-after src_dir dst_dir'."""
+    src_dir = Path(src_dir)
+    if not src_dir.is_dir():
+        print(f'Warning: {src_dir} does not exist, nothing to sync.')
+        return
+    target = Path(dst_dir) / src_dir.name
 
+    def copy_if_newer(src: str, dst: str) -> None:
+        if not os.path.exists(dst) or os.path.getmtime(src) > os.path.getmtime(dst):
+            shutil.copy2(src, dst)
+            print(dst)
+
+    shutil.copytree(src_dir, target, copy_function=copy_if_newer, dirs_exist_ok=True)
+    # Delete files that are no longer in the source:
+    for path in sorted(target.rglob('*'), reverse=True):
+        if not (src_dir / path.relative_to(target)).exists():
+            print('deleting', path)
+            shutil.rmtree(path) if path.is_dir() else path.unlink()
 
 def _fetch_and_write(url: str, dest: Path) -> None:
     try:
